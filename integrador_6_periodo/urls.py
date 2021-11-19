@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
 schema_view = get_swagger_view(title='RN Empregos')
 
@@ -22,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app1.urls')),
     path('autenticacao/', include('authentication.urls')),
+    path('anuncio/', include('announcement.urls')),
     path('api/', schema_view, name='schema-swagger-ui'),
+    path('api/anuncio/', include('announcement.api.urls')),
     
-]
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

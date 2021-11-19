@@ -2,3 +2,4 @@ venv*
 *.sh
 
 db.sqlite3
+media*

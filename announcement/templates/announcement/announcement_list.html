@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    {% for announce in announces %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{announce.title}}</h5>
+                            <p>{{announce.description | safe }}</p>
+                            <div style="display: flex;" >
+                                <div style="display: flex;">
+                                    <img style="max-width: 50px;" src="/media/{{announce.user.image}}" alt="">
+                                    <p style="margin-left:5px;">{{announce.user.username}}</p>
+                                </div>
+                                <div style="margin-left: 20px;">
+                                    <p class="card-text"> Data da Publicação:
+                                    {{announce.created | date}}</p>
+                                </div> 
+                                <a style="margin-left: 55px;" href="#" class="btn btn-info">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

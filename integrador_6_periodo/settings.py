@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_swagger',
+    'ckeditor',
     
     #apps
     'app1',
     'authentication',
+    'announcement',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +151,5 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' ,
 }
+MEDIA_URL = 'media/'
+MEDIA_ROOT = "{}/media".format(BASE_DIR)
