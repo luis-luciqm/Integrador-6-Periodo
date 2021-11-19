@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app1.urls')),
     path('autenticacao/', include('authentication.urls')),
-    path('anuncio/', include('announcement.urls')),
+    path('', include('announcement.urls')),
     path('api/', schema_view, name='schema-swagger-ui'),
     path('api/anuncio/', include('announcement.api.urls')),
     

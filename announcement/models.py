@@ -11,6 +11,7 @@ class Announcement(models.Model):
     prerequisites = models.TextField()
     note = models.TextField()
     email = models.EmailField()
+    image = models.ImageField(upload_to='img/announces/',blank=True,null=True,max_length=255)
     
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
