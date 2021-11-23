@@ -3,11 +3,14 @@ from ckeditor.fields import RichTextField
 from authentication.models import User
 
 # Create your models here.
+class City (models.Model):
+    name = models.CharField(max_length=200)
+    estado = models.CharField(max_length=200)
 class Announcement(models.Model):
     title = models.CharField(max_length=100)
     description = RichTextField(blank=True, null=False)
     number_vacancies = models.IntegerField()
-    city = models.CharField(max_length=150)
+    city = models.ForeignKey(City, blank=True, on_delete=models.SET_NULL, related_name="city_announcement", null=True)
     prerequisites = models.TextField()
     note = models.TextField()
     email = models.EmailField()
@@ -20,3 +23,4 @@ class Announcement(models.Model):
     
     class Meta:
         verbose_name = "Anuncios"
+        

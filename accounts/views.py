@@ -19,7 +19,6 @@ class UserCreateView(CreateView):
     template_name= 'accounts/auth-register.html'
     form_class = UserForm
     success_url = '/accounts/login'
-    success_message = "Usuário Cadastrado! Solicite o administrador a liberação."
 
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
