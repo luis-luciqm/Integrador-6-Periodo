@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'app1',
     'authentication',
     'announcement',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'integrador_6_periodo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -159,3 +160,9 @@ MEDIA_ROOT = "{}/media".format(BASE_DIR)
 
 AUTH_USER_MODEL = 'authentication.User'
 ROLEPERMISSIONS_MODULE = 'integrador_6_periodo.roles'
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
