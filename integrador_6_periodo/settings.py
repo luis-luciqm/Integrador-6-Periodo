@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'ckeditor',
     
     #apps
-    'app1',
     'authentication',
     'announcement',
     'accounts',

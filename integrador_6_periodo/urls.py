@@ -23,7 +23,6 @@ schema_view = get_swagger_view(title='RN Empregos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app1.urls')),
     path('autenticacao/', include('authentication.urls')),
     path('', include('announcement.urls')),
     path('api/', schema_view, name='schema-swagger-ui'),
