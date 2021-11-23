@@ -141,6 +141,9 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTHENTICATION_BACKENDS = (
+    ('django.contrib.auth.backends.ModelBackend'),
+)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -153,3 +156,6 @@ REST_FRAMEWORK = {
 }
 MEDIA_URL = 'media/'
 MEDIA_ROOT = "{}/media".format(BASE_DIR)
+
+AUTH_USER_MODEL = 'authentication.User'
+ROLEPERMISSIONS_MODULE = 'integrador_6_periodo.roles'
