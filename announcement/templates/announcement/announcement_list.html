@@ -2,56 +2,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <div class="container">
+    {% for announce in announces %}
+        <div  class="container">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-6">
-                    <div class="card">
+                    <div style="margin-top:100px;" class="card">
                         <div class="card-header">
-                            <h4>Card Action Button</h4>
+                            <h4>{{announce.title}}</h4>
                         </div>
                         <div class="card-body">
-                            This is some text within a card body.
+                            <span>
+                                <b>{{announce.description|safe}}</b>
+                            </span>
+
+                            <span>
+                                {{announce.prerequisites|safe}}
+                            </span>
                         </div>
                         <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
+                            <a href="{% url 'detalhes_anuncio' announce.id %}" class="btn btn-primary">Detalhes</a>
                         </div>
                     </div>
                 </div>
             </div>  
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Card Action Button</h4>
-                        </div>
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Card Action Button</h4>
-                        </div>
-                        <div class="card-body">
-                            This is some text within a card body.
-                        </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
+    {% endfor%}
 
 {% endblock content %}
