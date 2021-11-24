@@ -18,13 +18,16 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
+
+from announcement.views import AnnouncementListView
 schema_view = get_swagger_view(title='RN Empregos')
 # from account.views import AccountList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('autenticacao/', include('authentication.urls')),
-    path('', include('announcement.urls')),
+    path('anuncio/', include('announcement.urls')),
+    path('', AnnouncementListView.as_view(), name="listar_anuncios"),
     path('api/', schema_view, name='schema-swagger-ui'),
     path('api/anuncio/', include('announcement.api.urls')),
     path('accounts/', include('accounts.urls')),

@@ -6,6 +6,8 @@ from authentication.models import User
 class City (models.Model):
     name = models.CharField(max_length=200)
     estado = models.CharField(max_length=200)
+    class Meta:
+        verbose_name = "Cidade"
 class Announcement(models.Model):
     title = models.CharField(max_length=100)
     description = RichTextField(blank=True, null=False)
