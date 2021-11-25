@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-from announcement.models import Announcement
+from announcement.models import Announcement, City
 from .forms import AnnouncementForm
 # Create your views here.
 
@@ -16,8 +16,7 @@ class AnnouncementListView(ListView):
     
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
-        # print(self.request.user.groups.filter(name='Admin')) # verificar Grupo do usuario
-        # print(self.request.user.get_all_permissions()) #Todas as permissoes de um usuario
+        context['citys'] = City.objects.all()
         return context
     
 class AnnouncementDatailView(DetailView):

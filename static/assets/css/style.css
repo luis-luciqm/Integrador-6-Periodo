@@ -1167,3 +1167,29 @@ section {
     text-align-last: center;
   }
 }
+
+@media only screen and (min-width: 1680px){
+  .container.announces{
+    margin-top: -14.5% !important; 
+    margin-right: 0px !important;
+  }
+  .container.filter{
+    padding-top:150px !important; 
+    margin-left:300px !important; 
+    width: 200px !important;
+  }
+
+}
+
+@media only screen and (min-width: 1300px){
+  .container.announces{
+    margin-top: -17.5%; 
+    margin-right: -300px;
+  }
+  .container.filter{
+    padding-top:150px; 
+    margin-left:170px; 
+    width: 200px;
+  }
+
+}

@@ -2,30 +2,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for announce in announces %}
-        <div  class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
-                    <div style="margin-top:100px;" class="card">
-                        <div class="card-header">
-                            <h4>{{announce.title}}</h4>
-                        </div>
-                        <div class="card-body">
-                            <span>
-                                <b>{{announce.description|safe}}</b>
-                            </span>
+    <div class="container filter">
+        <label for="select_vaga"><b>Opção da vaga</b></label>
+        <select id="select_vaga" class="form-select" aria-label="Default select example">
+            <option selected>Estágio</option>
+            <option value="1">Emprego</option>
+        </select>
 
-                            <span>
-                                {{announce.prerequisites|safe}}
-                            </span>
-                        </div>
-                        <div class="card-footer text-right">
-                            <a href="{% url 'detalhes_anuncio' announce.id %}" class="btn btn-primary">Detalhes</a>
+        <br><br>
+
+        <label for=""><b>Cidade</b></label>
+        {% for city in citys %}
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                {{city.name}}
+            </label>
+        </div>
+        {% endfor %}
+
+        <br><br>
+
+        <span class="btn btn-primary">Buscar</span>
+    </div>
+    <div class="container announces">
+        <div style="width:100%;">
+            {% for announce in announces %}
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <b><h5 class="card-title">{{announce.title}}</h5></b>
+                                <span style="font-size:12.5px;">{{announce.description|safe}}</span>
+                                <a href="{% url 'detalhes_anuncio' announce.id %}" class="btn btn-primary">Detalhes</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>  
+            {% endfor%}
         </div>
-    {% endfor%}
+        
+    </div>
 
 {% endblock content %}
