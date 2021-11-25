@@ -1,7 +1,7 @@
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin)
+    AbstractBaseUser, BaseUserManager, Group, PermissionsMixin)
 
 # Create your models here.
 class UserManager(BaseUserManager):

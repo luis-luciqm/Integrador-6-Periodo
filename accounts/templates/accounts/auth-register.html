@@ -11,7 +11,16 @@
               </div>
   
               <div class="card card-primary">
-                <div class="card-header"><h4>Register</h4></div>
+                <div class="card-header">
+                  {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                  {% endif %}
+                  <h4>Register</h4>
+                </div>
   
                 <div class="card-body">
                   <form method="POST">

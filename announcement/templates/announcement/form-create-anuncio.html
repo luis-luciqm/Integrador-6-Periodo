@@ -9,6 +9,13 @@
                 <h4>Escreva o novo Anúncio</h4>
             </div>
             <div class="card-body">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 <form style="margin-top:50px;" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{form.media}}

@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from .forms import *
+from django.contrib.auth.models import Group
 
 
 class UserLogin(LoginView):
@@ -25,5 +26,10 @@ class UserCreateView(CreateView):
         user = form.save(commit=False)
         # user.is_active=False
         user.save()
+        my_group = Group.objects.get(name='Normal') 
+        user.groups.add(my_group)
+
+
+        
       
         return super().form_valid(form)
