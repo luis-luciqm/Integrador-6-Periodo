@@ -28,8 +28,4 @@ class UserCreateView(CreateView):
         user.save()
         my_group = Group.objects.get(name='Normal') 
         user.groups.add(my_group)
-
-
-        
-      
         return super().form_valid(form)
