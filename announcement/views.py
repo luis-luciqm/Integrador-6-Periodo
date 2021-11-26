@@ -19,7 +19,20 @@ class AnnouncementListView(ListView):
         context = super(ListView, self).get_context_data()
         context['citys'] = City.objects.all()
         return context
-    
+    def get_queryset(self):
+        if self.request.GET.get('search_for_type_vacancies'):
+            type = self.request.GET.get('search_for_type_vacancies')
+            announce = Announcement.objects.filter(type_vacancy=type)
+            if announce:
+                return announce
+            
+        if self.request.GET.get('search_for_citys'):
+            city = self.request.GET.get('search_for_citys')
+            announce = Announcement.objects.filter(city__name=city)
+            if announce:
+                return announce
+            
+        return Announcement.objects.all()
 class AnnouncementDatailView(DetailView):
     model = Announcement
     queryset = Announcement.objects.all()

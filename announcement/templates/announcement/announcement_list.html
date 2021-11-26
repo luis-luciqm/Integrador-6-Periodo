@@ -3,28 +3,26 @@
 
 {% block content %}
     <div class="container filter">
-        <label for="select_vaga"><b>Opção da vaga</b></label>
-        <select id="select_vaga" class="form-select">
-            <option select>Escolha uma opção</option>
-            <option value="1">Estágio</option>
-            <option value="2">Emprego</option>
-        </select>
+        <form method="GET" id="search-form">
+            <label for="select_vaga"><b>Opção da vaga</b></label>
+            <select id="select_vaga" class="form-select" name="search_for_type_vacancies">
+                <option>Escolha uma opção</option>
+                <option value="estagio">Estágio</option>
+                <option value="emprego">Emprego</option>
+            </select>
 
-        <br><br>
+            <br><br>
 
-        <label for=""><b>Cidade</b></label>
-        {% for city in citys %}
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-                {{city.name}}
-            </label>
-        </div>
-        {% endfor %}
+            <label for=""><b>Cidade</b></label>
+            <select id="select_vaga" class="form-select" name="search_for_citys">
+                {% for city in citys %}
+                    <option value="{{city.name}}">{{city.name}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
 
-        <br><br>
-
-        <span class="btn btn-primary">Buscar</span>
+            <input type="submit" value="Buscar">
+        </form>
     </div>
     <div class="container announces">
         <div style="width:100%;">

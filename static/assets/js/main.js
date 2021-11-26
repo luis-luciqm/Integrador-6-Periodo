@@ -4,6 +4,13 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+var searchform = $('#search-form')
+var searchbtn = $('#search-btn')
+
+  $(searchbtn).on('click', function(){
+    searchform.submit();
+  })
+  
 (function() {
   "use strict";
 
