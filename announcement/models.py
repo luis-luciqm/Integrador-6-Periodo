@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from authentication.models import User
+from .utils import *
 
 # Create your models here.
 class City (models.Model):
@@ -23,6 +24,15 @@ class Announcement(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_announcement")
     
+    slug = models.SlugField(max_length=255, null=False, blank=True, unique=True)
+    
     class Meta:
         verbose_name = "Anuncios"
+        
+    def save(self, *args, **kwargs):    
+       
+        if self.slug == '' or self.slug == None:
+            self.slug = unique_slug_generator(self)
+
+        super().save()
         

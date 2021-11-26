@@ -2,7 +2,8 @@ from rest_framework import generics, status
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import *
 from rest_framework.response import Response
-
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
 
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
@@ -23,9 +24,10 @@ class RegisterView(generics.GenericAPIView):
         user_data = serializer.data
         user = User.objects.get(email=user_data['email'])
         
-        my_group = Group.objects.get(name='Normal') 
-        user.groups.add(my_group)
         
+        my_group, created = Group.objects.get_or_create(name='Normal')
+        user.groups.add(my_group)
+            # Code to add permission to group ???
         token = RefreshToken.for_user(user).access_token
     
         return Response(user_data, status=status.HTTP_200_OK)

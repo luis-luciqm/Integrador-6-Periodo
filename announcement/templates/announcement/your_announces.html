@@ -1,0 +1,31 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-top:100px;" class="container">
+    <div style="width:100%;">
+        {% if announces %}
+            {% for announce in announces %}
+                <div class="row" style="margin-top:10px;">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <b><h5 class="card-title">{{announce.title}}</h5></b>
+                                <span style="font-size:12.5px;">{{announce.description|safe}}</span>
+                                <a href="{% url 'detalhes_anuncio' announce.id %}" class="btn btn-primary">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor%}
+        {% else %}
+        <div class="card">
+            <div class="card-title text-center">
+               <h4>Não há nada por aqui</h4>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock content %}

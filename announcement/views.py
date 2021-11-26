@@ -1,3 +1,4 @@
+from django.db.models import query
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView
@@ -23,6 +24,7 @@ class AnnouncementDatailView(DetailView):
     model = Announcement
     queryset = Announcement.objects.all()
     context_object_name = 'announce'
+    lookup_field = 'slug'
 
 class AnnouncementCreateView(PermissionRequiredMixin,LoginRequiredMixin,CreateView):
     model = Announcement
@@ -35,3 +37,12 @@ class AnnouncementCreateView(PermissionRequiredMixin,LoginRequiredMixin,CreateVi
         ad = self.object = form.save(commit=False)
         ad.user = self.request.user
         return super().form_valid(form)
+    
+class AnnouncementYourView(LoginRequiredMixin,ListView):
+    model = Announcement
+    template_name = 'announcement/your_announces.html'
+    context_object_name = 'announces'
+    
+    def get_queryset(self):
+        queryset = Announcement.objects.filter(user = self.request.user)
+        return queryset
