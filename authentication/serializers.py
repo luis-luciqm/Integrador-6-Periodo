@@ -58,3 +58,22 @@ class LoginSerializer(serializers.ModelSerializer):
         }
 
         return super().validate(attrs)
+
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(max_length=70,min_length=6,write_only=True)
+
+    class Meta:
+        model = User
+        fileds = ['email', 'username', 'password']
+        exclude = ('updated','created', 'fullname')
+
+    def validate(self, attrs):
+        email = attrs.get('email', '')
+        username = attrs.get('username', '')
+        
+        return attrs
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
+
+    
