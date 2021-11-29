@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_swagger',
     'ckeditor',
-    
+    'crispy_forms',
+    'django_email',
     #apps
     'authentication',
     'announcement',
@@ -160,8 +161,17 @@ MEDIA_ROOT = "{}/media".format(BASE_DIR)
 AUTH_USER_MODEL = 'authentication.User'
 ROLEPERMISSIONS_MODULE = 'integrador_6_periodo.roles'
 
-
+#login and logout
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'sair'
+
+#password reset
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '183eba31685afb'
+EMAIL_HOST_PASSWORD = 'cf912a66073590'
+EMAIL_PORT = '2525'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))

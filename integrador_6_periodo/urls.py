@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
+from django.contrib.auth import views as auth_views
 
 from announcement.views import AnnouncementListView
 schema_view = get_swagger_view(title='RN Empregos')

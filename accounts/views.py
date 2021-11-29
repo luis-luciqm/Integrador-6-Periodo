@@ -1,11 +1,11 @@
-from django.http import response
-from django.shortcuts import render
-from rest_framework import generics, status
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView,PasswordResetView
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from .forms import *
 from django.contrib.auth.models import Group
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView, PasswordChangeView
 
 
 class UserLogin(LoginView):
@@ -29,3 +29,29 @@ class UserCreateView(CreateView):
         my_group = Group.objects.get(name='Normal') 
         user.groups.add(my_group)
         return super().form_valid(form)
+    
+class PasswordReset(SuccessMessageMixin, PasswordResetView):
+    template_name = 'accounts/password-reset.html'
+    email_template_name = 'accounts/password_reset_email.html'
+    html_email_template_name = 'accounts/password_reset_email.html'
+    subject_template_name = 'accounts/password_reset_subject.txt'
+    success_url = '/accounts/password_reset/done/'
+    
+class PasswordResetDone(SuccessMessageMixin, PasswordResetDoneView):
+    template_name = 'accounts/password_reset_done.html'
+
+
+class PasswordResetConfirm(SuccessMessageMixin, PasswordResetConfirmView):
+    template_name = 'accounts/password_reset_confirm.html'
+    success_url = '/accounts/login'
+
+
+class PasswordResetCompleteView(SuccessMessageMixin, PasswordResetCompleteView):
+    success_message = 'Senha Alterada com sucesso!'
+    template_name = 'accounts/login.html'
+    
+    
+# class PasswordChange(SuccessMessageMixin, PasswordChangeView):
+#     template_name = 'accounts/password-change.html'
+#     success_url = 'index'
+#     success_message = "Senha alterada com sucesso!"

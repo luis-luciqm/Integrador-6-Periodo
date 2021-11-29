@@ -19,3 +19,5 @@ class UserForm(UserCreationForm):
         self.fields['fullname'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+        
+# class PasswordResetForm():
