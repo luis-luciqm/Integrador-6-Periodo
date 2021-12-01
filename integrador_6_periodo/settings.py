@@ -168,10 +168,8 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'sair'
 
 #password reset
-EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '183eba31685afb'
-EMAIL_HOST_PASSWORD = 'cf912a66073590'
-EMAIL_PORT = '2525'
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rnempregosemail@gmail.com'
+EMAIL_HOST_PASSWORD = 'qkgnpooyawngcixt'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
