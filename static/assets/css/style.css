@@ -1193,3 +1193,7 @@ section {
   }
 
 }
+
+.exit:hover{
+  color: #b30000 !important;
+}
