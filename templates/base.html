@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <link rel='icon' style="border-radius: 50% !important;" href="{% static 'img/rn.png'%}" type='image/x-icon' sizes="16x16" />
+  <link rel='icon' style="border-radius: 50% !important;" href="{% static 'img/rn1.png'%}" type='image/x-icon' sizes="16x16" />
 
   <title>RN Empregos</title>
   <meta content="" name="description">
@@ -45,6 +45,8 @@
               <li><a class="nav-link scrollto" href="#about">Empregos</a></li>
               {% if perms.announcement.can_add_announcement %} <!-- so vai aparece para quem tem permissao de adicionar -->
                 <li><a class="nav-link scrollto" href="{% url 'criar_anuncio'%}">Anunciar</a></li>
+              {% else %}
+                <li><a class="nav-link scrollto" href="#">Seja um anunciante</a></li>
               {% endif %}
               <li><a class="nav-link scrollto " href="#portfolio">Quem busca</a></li>
               <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
