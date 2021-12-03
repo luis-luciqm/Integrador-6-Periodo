@@ -12,13 +12,16 @@ from .forms import AnnouncementForm
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
-    queryset = Announcement.objects.all()
-    context_object_name = 'announces'
+
     
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
         context['citys'] = City.objects.all()
+        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio')
+        context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego')
+        
         return context
+    
     def get_queryset(self):
         if self.request.GET.get('search_for_type_vacancies') and self.request.GET.get('search_for_citys'):
             type = self.request.GET.get('search_for_type_vacancies')

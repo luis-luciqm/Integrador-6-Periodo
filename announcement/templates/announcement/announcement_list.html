@@ -2,49 +2,121 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if announces%}
-    <div class="container filter">
-        <form method="GET" id="search-form">
-            <label for="select_vaga"><b>Opção da vaga</b></label>
-            <select id="select_vaga" class="form-select" name="search_for_type_vacancies">
-                <option value="estagio">Estágio</option>
-                <option value="emprego">Emprego</option>
-            </select>
+    {% if announces_estagio or announces_emprego%}
+    
+    <section id="emprego" class="services section-bg">
+        <div class="container">
 
-            <br><br>
-
-            <label for=""><b>Cidade</b></label>
-            <select id="select_vaga" class="form-select" name="search_for_citys">
-                {% for city in citys %}
-                    <option value="{{city.name}}">{{city.name}}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-
-            <input type="submit" value="Buscar">
-        </form>
-    </div>
-    <div class="container announces">
-        <div style="width:100%;">
-            {% for announce in announces %}
-                <div class="row" style="margin-top:10px;">
-                    <div class="col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <b><h5 class="card-title">{{announce.title}}</h5></b>
-                                <span style="font-size:12.5px;">{{announce.description|safe}}</span>
-                                <a href="{% url 'detalhes_anuncio' announce.slug %}" class="btn btn-primary">Detalhes</a>
-                            </div>
-                        </div>
+            <div class="section-title">
+                <h2>Ofertas de Emprego</h2>
+                <p>Temos algumas ofertas de emprego esperando por você!</p>
+            </div>
+            <div class="row">
+            {% for announce in announces_emprego %}
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"><img style="width:150px;" src="/media/{{announce.image}}" alt=""></div>
+                        <h4><a href="">{{announce.title}}</a></h4>
+                        <span>{{announce.prerequisites | safe }}</span>
+                        <br>
+                        <a href="{% url 'detalhes_anuncio' announce.slug %}"><p style="background-color:#16df7e; color:white;" class="btn">Detalhes</p></a>
                     </div>
                 </div>
             {% endfor%}
+            </div>
+            
         </div>
-        
-    </div>
-    {% else %}
-        <br><br><br><br>
-        <h1 style="text-align: center;" class="logo"><a href="/">Não há nada por aqui!</a></h1>
-    {% endif%}
+    </section>
 
+
+    <section id="estagio" class="services section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Ofertas de Estágio</h2>
+                <p>Temos algumas ofertas de estágio esperando por você!</p>
+            </div>
+            <div class="row">
+            {% for announce in announces_estagio %}
+                
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+                    <div class="icon-box">
+                        <div class="icon"><img style="width:150px;" src="/media/{{announce.image}}" alt=""></div>
+                    <h4><a href="">{{announce.title}}</a></h4>
+                    <p>{{announce.prerequisites| safe }}</p>
+                    <br>
+                    <a href="{% url 'detalhes_anuncio' announce.slug %}"><p style="background-color:#16df7e; color:white;" class="btn">Detalhes</p></a>
+                    </div>
+                </div>
+                
+            {% endfor%}
+            </div>
+            
+        </div>
+    </section>
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <form method="GET" id="search-form">
+               
+                <label for="select_vaga"><b>Opção da vaga</b></label>
+                <select id="select_vaga" class="form-select" name="search_for_type_vacancies">
+                    <option value="estagio">Estágio</option>
+                    <option value="emprego">Emprego</option>
+                </select>
+
+                <br><br>
+
+                <label for=""><b>Cidade</b></label>
+                <select id="select_vaga" class="form-select" name="search_for_citys">
+                    {% for city in citys %}
+                        <option value="{{city.name}}">{{city.name}}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
+
+                <input type="submit" value="Buscar">
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% else %}
+    <br><br><br><br>
+    <h1 style="text-align: center;" class="logo"><a href="/">Não há nada por aqui!</a></h1>
+{% endif%}
 {% endblock content %}
+
+
+      <!-- <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bxl-dribbble"></i></div>
+            <h4><a href="">Lorem Ipsum</a></h4>
+            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bx-tachometer"></i></div>
+            <h4><a href="">Magni Dolores</a></h4>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+          <div class="icon-box">
+            <div class="icon"><i class="bx bx-world"></i></div>
+            <h4><a href="">Nemo Enim</a></h4>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+          </div>
+        </div> -->
+
+   

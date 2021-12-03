@@ -15,7 +15,7 @@ class UserLogin(LoginView):
 
     def form_invalid(self, form):
         messages.error(self.request, 'Não foi possível fazer o login, verifique os dados.')
-        return super().form_invalid(form)
+        return redirect('/accounts/login')
     
 class UserCreateView(CreateView):
     template_name= 'accounts/auth-register.html'
