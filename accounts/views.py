@@ -10,7 +10,7 @@ from django.contrib.auth.views import LoginView, PasswordResetView, PasswordRese
 
 
 class UserLogin(LoginView):
-    template_name = 'accounts/login.html'
+    template_name = 'accounts/auth-login.html'
     success_url = '/'
 
     def form_invalid(self, form):
