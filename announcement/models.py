@@ -22,7 +22,7 @@ class Announcement(models.Model):
     prerequisites = models.TextField()
     note = models.TextField()
     email = models.EmailField()
-    image = models.ImageField(upload_to='img/announces/',blank=True,null=True,max_length=255)
+    image = models.ImageField(upload_to='announces/img',blank=True,null=True,max_length=255)
     money = models.IntegerField(default=0)
     
     created = models.DateTimeField(auto_now_add=True)
@@ -42,4 +42,8 @@ class Announcement(models.Model):
             self.slug = unique_slug_generator(self)
 
         super().save()
-        
+
+class ParticipateAnnounce(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_partcipate")
+    announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE,related_name="announcement_participate")
+    curriculum = models.FileField(upload_to='users/curriculos/',null=False,max_length=None)
