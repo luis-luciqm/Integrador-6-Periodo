@@ -1,4 +1,5 @@
-from django.db.models import query
+
+from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView
@@ -12,36 +13,19 @@ from .forms import AnnouncementForm
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
-
+    queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio'))[:4]
+    context_object_name = 'announcements'
     
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
         context['citys'] = City.objects.all()
-        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio')
-        context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego')
+        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio').count()
+        context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego').count()
+        context['last_posts'] = Announcement.objects.all().order_by('-created')[:7]
         
         return context
     
-    def get_queryset(self):
-        if self.request.GET.get('search_for_type_vacancies') and self.request.GET.get('search_for_citys'):
-            type = self.request.GET.get('search_for_type_vacancies')
-            city = self.request.GET.get('search_for_citys')
-            announce = Announcement.objects.filter(type_vacancy=type,city__name=city)
-            if announce:
-                return announce
-        elif self.request.GET.get('search_for_type_vacancies'):
-            type = self.request.GET.get('search_for_type_vacancies')
-            announce = Announcement.objects.filter(type_vacancy=type)
-            if announce:
-                return announce
-            
-        elif self.request.GET.get('search_for_citys'):
-            city = self.request.GET.get('search_for_citys')
-            announce = Announcement.objects.filter(city__name=city)
-            if announce:
-                return announce
-            
-        return Announcement.objects.all()
+
 class AnnouncementDatailView(DetailView):
     model = Announcement
     queryset = Announcement.objects.all()

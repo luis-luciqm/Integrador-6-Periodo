@@ -12,7 +12,7 @@ class City (models.Model):
 class Announcement(models.Model):
     TYPE_VACANCY = (
         ('emprego', "Emprego"),
-        ('estagio', "Estagio")
+        ('estagio', "Estágio")
     )
     
     title = models.CharField(max_length=100)
@@ -32,6 +32,7 @@ class Announcement(models.Model):
     
     slug = models.SlugField(max_length=255, null=False, blank=True, unique=True)
     type_vacancy = models.CharField(choices=TYPE_VACANCY, max_length=25, default='1')
+    active = models.BooleanField(default=True)
     
     class Meta:
         verbose_name = "Anuncios"

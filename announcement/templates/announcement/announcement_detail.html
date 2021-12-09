@@ -1,59 +1,79 @@
-
 {% extends 'base.html' %}
-{% load static %}
+{% load static  %}
 
 {% block content %}
-<br><br><br>
-    <section id="detail" class="section-bg">
-        <div class="container">
-            <div class="row">
-                <div class="card-body">
-                    <ul class="nav">
-                        <li style="font-size:12px;" class="nav-item">
-                            <img style="width: 15px;" src="{% static 'img/time.png'%}" alt=""> Publicado em {{announce.created|date}}
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <img style="width:150px;" src="/media/{{announce.image}}" alt="">
-                        </li>
-                        <li class="nav-item">
-                            <h4>{{announce.title}}</h4>
-                            <p>{{announce.user.fullname}}</p>
-                        </li>
-                    </ul>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <br>
-    <div class="container">
-        <div class="row">
-            <img style="width:50px;" src="{% static 'img/money.png'%}" alt="">Salário base:  ${{announce.money}}
-        </div>
-        <div class="row">
-            <img style="width:50px;" src="{% static 'img/location.png'%}" alt="">
-            {{announce.city.name}}
-        </div>
-        <br>
-        <div class="card-body">
-            <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Descrição</a>
-            </li>
-            </ul>
-
-            <div class="card-body">
-                <p>{{announce.description | safe }}</p>
-            </div>
-        </div>
-        <div class="row">
-            <a class="btn" style="background-color:rgb(0, 119, 255); width: 150px; padding: 20px; margin:auto; color: white;" href="#">Candidate-se</a>
+<div class="main-content">
+    <section class="section">
+    <div class="section-header">
+        <h1>Detalhes do Anúncio</h1>
+        <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+        <div class="breadcrumb-item"><a href="#">Posts</a></div>
+        <div class="breadcrumb-item">All Posts</div>
         </div>
     </div>
-    <br><br>
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div style="max-width: 1600px;" class="card">
+                    <div style="max-width: 1200px;" class="card-body">
+
+                        <img class="card-img-left" style="width: 300px; height: 250px;" src="/media/{{ object.image }}" alt="Card image cap">
+                        <div class="card-body float-left">
+                            <h5 style="font-size: 20px; max-width:700px;" class="card-title">{{ object.title }}</h5>
+                            <p style="font-size: 25px;" class="card-text text-success"> <b>R$ {{ object.price }}</b></p>
+                            {% if object.form_payment.name == "Á vista" %}
+                                <p><i class="fas fa-money-bill-wave"></i> {{ object.form_payment }}</p>
+                            {% else %}
+                                <p><i class="fas fa-credit-card"></i> {{ object.form_payment }}</p>
+                            {% endif %}
+                            <p class="card-text"><small class="text-muted">Postado em {{ object.created_at}}</small></p>
+                            <a href="{{ object.long_url}}"><p style="font-size: 15px; background-color: #C22637 !important;" class="card-text badge badge-danger float-right"><i class="fas fa-shopping-cart pe-font-cart"></i> Ir à loja</p></a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div style="max-width: 1600px; margin: auto;" class="card"> 
+            <br><h5 style="color: #C22637; margin-left: 10px;"><i style="font-size:20px;" class="fas fa-info-circle"></i> Informações do Produto</h5><br>
+
+            <div style="max-width: 1100px; text-align: justify;" class="card-body float-left">
+                {{ object.description|safe }}
+            </div>
+            <div class="card-body">
+                <div class="mb-2 text-muted"><i class="fas fa-image"></i> Foto Real:</div>
+                <div class="chocolat-parent">
+                    <a href="/media/{{object.image}}" class="chocolat-image" title="Just an example">
+                        <div data-crop-image="485">
+                            <img alt="image" src="/media/{{object.image}}" class="img-fluid">
+                        </div>
+                    </a>
+                </div>
+                <br>
+                <div style="max-width: 230px;" class="mb-2 text-muted">
+                    {% if object.user.image %}
+                        <img class="float-left" style="border-radius: 50%; max-width: 50px;" class="card"src="/media/{{object.user.image}}" class="img-fluid"alt="">
+                    {% else %}
+                        <img class="float-left" style="border-radius: 50%; max-width: 40px;" class="card" src="{% static 'assets/img/avatar/avatar-1.png' %}" class="img-fluid"alt="">
+                    {% endif %}
+                    <p class="float-left text-danger"><b>Quem Postou:</b></p>
+                    <p class="float-right"> {{object.user.username}}</p>
+                </div><br>
+            </div>
+        </div>
+
+
+    </section>
+</div>
 {% endblock content %}
+
+ {% block js_page %}
+    <script src="{% static 'node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js' %}"></script>
+    <script src="{% static 'node_modules/nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+
+{% endblock js_page %}
