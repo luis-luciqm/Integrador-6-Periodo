@@ -38,6 +38,87 @@
           </div>
         </div>
       </div>
+
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 style="margin: auto;">Vagas de emprego na sua região</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        {% for emprego in announces_emprego %}
+
+        <div class="col-3 col-md-6 col-lg-6">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h4>{{emprego.title}}</h4>
+              <div class="card-header-action">
+                <a href="#" class="btn btn-primary">
+                  Detalhes
+                </a>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>{{emprego.description | safe}}</p>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Últimas Postagens</h4>
+              <div class="card-header-action">
+                <a href="#" class="btn btn-primary">Veja Todos</a>
+              </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th>Imagem</th>
+                      <th>Descrição</th>
+                      <th>Responsável pela Publicação</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td>
+                          <img src="https://w7.pngwing.com/pngs/998/203/png-transparent-black-and-white-no-to-camera-logo-video-on-demand-retail-website-simple-no-miscellaneous-television-text.png" width="45"  class="mr-1" alt="">
+                        </td>
+                        <td>
+                          <a style="color: rgb(31, 31, 31)" href="#">Descrição massa</a>
+                        </td>
+                        <td>
+                          <img src="" alt="avatar" width="30" class="rounded mr-3"><strong>Luís Lucilandio</strong>
+                        </td>
+                    </tr>
+                  </tbody>
+                  <!-- <div class="card-header">
+                    <h4 style="margin: auto;">Nenhuma Postagem Publicada</h4>
+                  </div> -->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
     </section>
   </div>
 {% endblock content %}
