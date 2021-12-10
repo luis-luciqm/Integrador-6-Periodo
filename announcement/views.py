@@ -32,6 +32,12 @@ class AnnouncementDatailView(DetailView):
     context_object_name = 'announce'
     lookup_field = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['anuncio'] = Announcement.objects.get(slug = self.kwargs['slug'])
+        return context
+
+
 class AnnouncementCreateView(PermissionRequiredMixin,LoginRequiredMixin,CreateView):
     model = Announcement
     form_class = AnnouncementForm

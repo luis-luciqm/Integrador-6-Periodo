@@ -5,7 +5,7 @@
 <div class="main-content">
     <section class="section">
     <div class="section-header">
-        <h1>Detalhes do Anúncio</h1>
+        <h1>Detalhes da Vaga</h1>
         <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item"><a href="#">Posts</a></div>
@@ -21,9 +21,10 @@
                         <img width="35%" height="25%" style="float: left;" src="https://tm.ibxk.com.br/2021/11/04/04160722090388.jpg" alt="">
 
                         <div style="margin-left: 30px;"  class="card-body float-left">
-                            <h5 style="font-size: 29px; max-width:700px;" class="card-title">Suporte Técnico - Pau dos Ferros - RN</h5>
-                            <p style="font-size: 25px;" class="card-text text-success"><b>Quantidade de Vagas: <span>50</span></b></p>
-                            <p class="card-text">Empresa: Brisanet Telecomunicações<br>Levando o mundo até você.</p>
+                            <h5 style="font-size: 29px; max-width:700px;" class="card-title">{{anuncio.title}}</h5>
+                            <p style="font-size: 25px;" class="card-text text-success"><b><span>{{anuncio.number_vacancies}}</span> Vagas Disponíveis</b></p>
+                            <p style="font-size: 20px;" class="card-text">{{anuncio.user.fullname|title}}</p>
+                            <p style="font-size: 20px;" class="card-text">{{anuncio.city}}</p>
                         </div>
 
                     </div>
@@ -36,8 +37,8 @@
         <div style="max-width: 1600px; margin: auto;" class="card"> 
             <h5 style="font-size: 35px; max-width:700px; margin: auto; margin-top: 20px;" class="card-title">Descrição da Vaga</h5>
 
-            <div style="max-width: 1100px; text-align: justify;" class="card-body float-left">
-                Descrição aqui
+            <div style="max-width: 1700px; " class="card-body">
+                {{anuncio.description|safe}}
             </div>
             <div class="card-body text-center">
                 <button class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></button>

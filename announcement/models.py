@@ -9,6 +9,10 @@ class City (models.Model):
     estado = models.CharField(max_length=200)
     class Meta:
         verbose_name = "Cidade"
+
+    def __str__(self):
+        return self.name + ' / ' + self.estado
+
 class Announcement(models.Model):
     TYPE_VACANCY = (
         ('emprego', "Emprego"),
