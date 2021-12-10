@@ -48,6 +48,7 @@ class AnnouncementCreateView(PermissionRequiredMixin,LoginRequiredMixin,CreateVi
     def form_valid(self, form):
         ad = self.object = form.save(commit=False)
         ad.user = self.request.user
+        ad.email = self.request.user.email
         return super().form_valid(form)
     
 class AnnouncementYourView(LoginRequiredMixin,ListView):

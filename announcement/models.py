@@ -47,6 +47,9 @@ class Announcement(models.Model):
             self.slug = unique_slug_generator(self)
 
         super().save()
+    
+    def __str__(self):
+        return self.title
 
 class ParticipateAnnounce(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_partcipate")

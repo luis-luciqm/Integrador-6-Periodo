@@ -173,3 +173,6 @@ EMAIL_HOST_USER = 'rnempregosemail@gmail.com'
 EMAIL_HOST_PASSWORD = 'qkgnpooyawngcixt'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'

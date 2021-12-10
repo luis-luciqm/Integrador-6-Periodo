@@ -9,3 +9,9 @@ class Solicitation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     accept = models.BooleanField(default=False)
+    
+    class Meta:
+        verbose_name = 'Solicitações'
+        
+    def __str__(self):
+        return self.user.username

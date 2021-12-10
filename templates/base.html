@@ -209,17 +209,17 @@
             <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Dashboard</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
                   {% if perms.announcement.add_announcement %}
                   <li><a class="nav-link" href="index.html">Seus Anúncios</a></li>
-                  <li><a class="nav-link" href="index.html">Criar Anúncio</a></li>
+                  <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   {% endif %}
                 </ul>
               </li>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-print"></i><span>Vagas</span></a>
+              <li class="nav-item dropdown active">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Vagas</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="index-0.html">Empregos</a></li>
                   <li><a class="nav-link" href="index.html">Estágios</a></li>
@@ -227,21 +227,11 @@
               </li>  
               {% if perms.accounts.view_solicitation %}
               <li class="nav-item dropdown">
-<<<<<<< HEAD
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-cog"></i><span>Administrador</span></a>
-=======
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-product"></i><span>Administrador</span></a>
->>>>>>> 2912127c1c611ca7cbefcbb58d5c96bfa0515cd9
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{% url 'listar_solicitacoes' %}">Lista de Solicitações</a></li>
                 </ul>
               </li> 
-              {% endif %}
-
-              {% if not perms.announcement.add_announcement %}
-              <li class="nav-item">
-                <a href="{% url 'seja_anunciante' %}" class="nav-link"><i class="fas fa-store"></i><span>Seja um Anunciante</span></a>
-              </li>
               {% endif %}
             </ul>
 

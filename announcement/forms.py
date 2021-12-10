@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class AnnouncementForm(forms.ModelForm):
     title = forms.CharField()
@@ -7,11 +8,11 @@ class AnnouncementForm(forms.ModelForm):
     city = forms.ModelChoiceField(queryset=City.objects.all())
     prerequisites = forms.CharField()
     note = forms.CharField()
-    email = forms.EmailField()
+    description = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
         model = Announcement
-        exclude = ['created', 'updated', 'user']
+        exclude = ['created', 'updated', 'user', 'email']
         
     def __init__(self, *args, **kwargs):
         super(AnnouncementForm, self).__init__(*args, **kwargs)
@@ -24,5 +25,5 @@ class AnnouncementForm(forms.ModelForm):
         self.fields['prerequisites'].widget.attrs['class'] = 'form-control'
         self.fields['note'].widget.attrs['class'] = 'form-control'
         self.fields['image'].widget.attrs['class'] = 'form-control'
-        self.fields['email'].widget.attrs['class'] = 'form-control'
-
+        self.fields['money'].widget.attrs['class'] = 'form-control'
+        self.fields['type_vacancy'].widget.attrs['class'] = 'form-control'
