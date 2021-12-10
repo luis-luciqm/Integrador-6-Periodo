@@ -86,11 +86,10 @@ class ListSolicitationView(PermissionRequiredMixin,LoginRequiredMixin, ListView)
     template_name = 'accounts/list-solicitation.html' 
     permission_required = ('accounts.view_solicitation')
     
-class UserBusinessView(PermissionRequiredMixin,LoginRequiredMixin,CreateView):
+class UserBusinessView(LoginRequiredMixin,CreateView):
     template_name= 'accounts/solicitation-business.html'
     form_class = SolicitationForm
     success_url = '/'
-    permission_required = ('accounts.add_solicitation')
     
     def form_valid(self, form):
         solicitation = form.save(commit=False)
