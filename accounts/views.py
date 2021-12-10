@@ -1,12 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView,PasswordResetView
 from django.shortcuts import redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib import messages
 from .forms import *
 from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView, PasswordChangeView
+from .models import *
 
 
 class UserLogin(LoginView):
@@ -23,13 +25,24 @@ class UserCreateView(CreateView):
     success_url = '/accounts/login'
 
     def form_valid(self, form):
-        """If the form is valid, save the associated model."""
         user = form.save(commit=False)
-        # user.is_active=False
         user.save()
         my_group, created = Group.objects.get_or_create(name='Normal') 
         user.groups.add(my_group)
         return super().form_valid(form)
+    
+
+class UserBusinessView(LoginRequiredMixin,CreateView):
+    template_name= 'accounts/solicitation-business.html'
+    form_class = SolicitationForm
+    success_url = '/'
+    
+    def form_valid(self, form):
+        solicitation = form.save(commit=False)
+        solicitation.user = self.request.user
+        return super().form_valid(form)
+        
+        
     
 class PasswordReset(SuccessMessageMixin, PasswordResetView):
     template_name = 'accounts/password-reset.html'
