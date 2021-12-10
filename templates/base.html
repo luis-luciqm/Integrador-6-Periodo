@@ -173,7 +173,7 @@
             {% endif %}
             <div class="d-sm-none d-lg-inline-block">Olá, {{request.user.username|title}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5</div>
+              <div style="text-align: justify;" class="dropdown-title">Logado desde {{request.user.created}}</div>
               <a href="{% url 'editar_usuario' user.id %}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Editar Perfil
               </a>
