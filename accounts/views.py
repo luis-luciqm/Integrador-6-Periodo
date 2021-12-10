@@ -1,7 +1,8 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView,PasswordResetView
 from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic import ListView
 from django.contrib import messages
 from .forms import *
 from django.contrib.auth.models import Group
@@ -30,20 +31,7 @@ class UserCreateView(CreateView):
         my_group, created = Group.objects.get_or_create(name='Normal') 
         user.groups.add(my_group)
         return super().form_valid(form)
-    
-
-class UserBusinessView(LoginRequiredMixin,CreateView):
-    template_name= 'accounts/solicitation-business.html'
-    form_class = SolicitationForm
-    success_url = '/'
-    
-    def form_valid(self, form):
-        solicitation = form.save(commit=False)
-        solicitation.user = self.request.user
-        return super().form_valid(form)
         
-        
-    
 class PasswordReset(SuccessMessageMixin, PasswordResetView):
     template_name = 'accounts/password-reset.html'
     email_template_name = 'accounts/password_reset_email.html'
@@ -90,3 +78,21 @@ class PasswordResetCompleteView(SuccessMessageMixin, PasswordResetCompleteView):
 #     template_name = 'accounts/password-change.html'
 #     success_url = 'index'
 #     success_message = "Senha alterada com sucesso!"
+
+class ListSolicitationView(PermissionRequiredMixin,LoginRequiredMixin, ListView):
+    model = Solicitation
+    queryset = Solicitation.objects.filter(accept = False)
+    context_object_name = 'solicitations'
+    template_name = 'accounts/list-solicitation.html' 
+    permission_required = ('accounts.view_solicitation')
+    
+class UserBusinessView(PermissionRequiredMixin,LoginRequiredMixin,CreateView):
+    template_name= 'accounts/solicitation-business.html'
+    form_class = SolicitationForm
+    success_url = '/'
+    permission_required = ('accounts.add_solicitation')
+    
+    def form_valid(self, form):
+        solicitation = form.save(commit=False)
+        solicitation.user = self.request.user
+        return super().form_valid(form)

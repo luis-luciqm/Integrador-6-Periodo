@@ -1,11 +1,12 @@
 from django.shortcuts import redirect
-from authentication.models import User
+from accounts.models import Solicitation
 from django.contrib.auth.models import Group
 
-def UserBusiness(request):
-    user = User.objects.get(pk=request.user.pk)
-    
+def ApproveSolicitation(request, pk):
+    solicitation = Solicitation.objects.get(pk=pk)
+    solicitation.accept = True
     my_group, created = Group.objects.get_or_create(name='Empresa') 
-    user.groups.add(my_group)
+    solicitation.user.groups.add(my_group)
     
-    return redirect('/')
+    solicitation.save()
+    return redirect('/accounts/listar_solicitacoes/')

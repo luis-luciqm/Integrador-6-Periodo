@@ -170,7 +170,7 @@
             <div class="d-sm-none d-lg-inline-block">Olá, {{request.user.username|title}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
+              <a href="#" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Editar Perfil
               </a>
               <a href="{% url 'change_password' %}" class="dropdown-item has-icon">
@@ -212,7 +212,10 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-                  <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+                  {% if perms.announcement.add_announcement %}
+                  <li><a class="nav-link" href="index.html">Seus Anúncios</a></li>
+                  <li><a class="nav-link" href="index.html">Criar Anúncio</a></li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -222,6 +225,14 @@
                   <li><a class="nav-link" href="index.html">Estágios</a></li>
                 </ul>
               </li>  
+              {% if perms.accounts.view_solicitation %}
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Administrador</span></a>
+                <ul class="dropdown-menu">
+                  <li><a class="nav-link" href="{% url 'listar_solicitacoes' %}">Lista de Solicitações</a></li>
+                </ul>
+              </li> 
+              {% endif %}
             </ul>
 
 

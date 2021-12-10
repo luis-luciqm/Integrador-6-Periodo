@@ -2,7 +2,6 @@ from django.urls.conf import path
 from django.contrib.auth.views import LogoutView
 from .views import *
 from django.contrib.auth import views as auth_views
-from django.contrib.auth import views as auth_views
 from .utils import *
 
 
@@ -19,4 +18,7 @@ urlpatterns = [
     path('teste/', PasswordResetView.as_view(), name='password_reset_view'),
     path('change_password/', auth_views.PasswordChangeView.as_view(template_name='accounts/change_password.html', success_url = '/accounts/login'), name="change_password"),
     path('seja_anunciante/',  UserBusinessView.as_view(), name='seja_anunciante'),
+    
+    path('listar_solicitacoes/', ListSolicitationView.as_view(), name= 'listar_solicitacoes'),
+    path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao')
 ]

@@ -1,0 +1,41 @@
+{%  extends "base.html" %}
+
+{% block content %}
+<div class="main-content">
+    <section class="section">
+      <div class="section-header">
+        <h1>Solicitações Para Anunciar</h1>
+      </div>
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Solicitante</th>
+            <th>Descrição</th>
+            <th>Hora</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for solicitation in solicitations %}
+          <tr>
+              <td>
+                {{solicitation.user.username}}
+              </td>
+              <td>
+                <a style="color: rgb(31, 31, 31)" href="#">{{ solicitation.description }}</a>
+              </td>
+              <td>
+                {{solicitation.created | timesince}}
+              </td>
+              <td>
+                  <a class="btn btn-primary" href="{% url 'aprovar_solicitacao' solicitation.id %}">Aceitar</a>
+              </td>
+              
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    </section>
+</div>
+
+{% endblock content %}
