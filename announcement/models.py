@@ -23,8 +23,6 @@ class Announcement(models.Model):
     description = RichTextField(blank=True, null=False)
     number_vacancies = models.IntegerField()
     city = models.ForeignKey(City, blank=True, on_delete=models.SET_NULL, related_name="city_announcement", null=True)
-    prerequisites = models.TextField()
-    note = models.TextField()
     email = models.EmailField()
     image = models.ImageField(upload_to='announces/img',blank=True,null=True,max_length=255)
     money = models.IntegerField(default=0)

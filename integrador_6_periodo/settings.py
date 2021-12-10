@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_swagger',
     'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'django_email',
     #apps
@@ -175,4 +176,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 700,
+    },
+}
 CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
