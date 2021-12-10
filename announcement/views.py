@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.views.generic.edit import UpdateView
 
 from announcement.models import Announcement, City
 from .forms import AnnouncementForm
@@ -50,7 +51,16 @@ class AnnouncementCreateView(PermissionRequiredMixin,LoginRequiredMixin,CreateVi
         ad.user = self.request.user
         ad.email = self.request.user.email
         return super().form_valid(form)
-    
+
+class AnnouncementUpdateView(PermissionRequiredMixin,LoginRequiredMixin,UpdateView):
+    model = Announcement
+    form_class = AnnouncementForm
+    template_name = 'announcement/form-create-anuncio.html'
+    success_url = '/'
+    permission_required = ('announcement.add_announcement')
+    queryset = Announcement.objects.all()
+    lookup_field = 'slug'
+
 class AnnouncementYourView(LoginRequiredMixin,ListView):
     model = Announcement
     template_name = 'announcement/your_announces.html'

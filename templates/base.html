@@ -213,7 +213,7 @@
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
                   {% if perms.announcement.add_announcement %}
-                  <li><a class="nav-link" href="index.html">Seus Anúncios</a></li>
+                  <li><a class="nav-link" href="{% url 'seus_anuncios' %}">Seus Anúncios</a></li>
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   {% endif %}
                 </ul>
