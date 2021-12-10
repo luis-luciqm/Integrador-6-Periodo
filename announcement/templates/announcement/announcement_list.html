@@ -100,6 +100,7 @@
                         </td>
                         <td>
                           <a style="color: rgb(31, 31, 31)" href="{% url 'detalhes_anuncio' post.slug %}">{{ post.title }}</a>
+                          <p style="font-size: 11.5px;">Postado há {{post.created|timesince}}</p>
                         </td>
                         <td style="color: rgb(31, 31, 31)">
                           {{post.number_vacancies}}
