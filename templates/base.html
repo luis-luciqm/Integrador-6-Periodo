@@ -166,11 +166,15 @@
 
           {% if request.user.username %}
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1">
+            {% if user.image %}
+              <img alt="image" src="/media/{{request.user.image}}" class="rounded-circle mr-1">
+            {% else %}
+              <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1">
+            {% endif %}
             <div class="d-sm-none d-lg-inline-block">Olá, {{request.user.username|title}}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5</div>
-              <a href="#" class="dropdown-item has-icon">
+              <a href="{% url 'editar_usuario' user.id %}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Editar Perfil
               </a>
               <a href="{% url 'change_password' %}" class="dropdown-item has-icon">

@@ -10,6 +10,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView, PasswordChangeView
 from .models import *
+from authentication.models import User
 
 
 class UserLogin(LoginView):
@@ -95,3 +96,10 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
         solicitation = form.save(commit=False)
         solicitation.user = self.request.user
         return super().form_valid(form)
+
+class UserEditView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['username', 'fullname', 'email', 'image']
+    success_url = '/'
+    template_name = 'accounts/edit-user.html'
+

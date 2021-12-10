@@ -20,5 +20,6 @@ urlpatterns = [
 
     path('seja_anunciante/',  UserBusinessView.as_view(), name='seja_anunciante'),
     path('listar_solicitacoes/', ListSolicitationView.as_view(), name= 'listar_solicitacoes'),
-    path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao')
+    path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao'),
+    path('editar_usuario/<int:pk>/', UserEditView.as_view(), name='editar_usuario')
 ]
