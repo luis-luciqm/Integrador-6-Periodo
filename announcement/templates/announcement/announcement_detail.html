@@ -18,18 +18,12 @@
                 <div style="max-width: 1600px;" class="card">
                     <div style="max-width: 1200px;" class="card-body">
 
-                        <img class="card-img-left" style="width: 300px; height: 250px;" src="/media/{{ object.image }}" alt="Card image cap">
-                        <div class="card-body float-left">
-                            <h5 style="font-size: 20px; max-width:700px;" class="card-title">{{ object.title }}</h5>
-                            <p style="font-size: 25px;" class="card-text text-success"> <b>R$ {{ object.price }}</b></p>
-                            {% if object.form_payment.name == "Á vista" %}
-                                <p><i class="fas fa-money-bill-wave"></i> {{ object.form_payment }}</p>
-                            {% else %}
-                                <p><i class="fas fa-credit-card"></i> {{ object.form_payment }}</p>
-                            {% endif %}
-                            <p class="card-text"><small class="text-muted">Postado em {{ object.created_at}}</small></p>
-                            <a href="{{ object.long_url}}"><p style="font-size: 15px; background-color: #C22637 !important;" class="card-text badge badge-danger float-right"><i class="fas fa-shopping-cart pe-font-cart"></i> Ir à loja</p></a>
+                        <img width="35%" height="25%" style="float: left;" src="https://tm.ibxk.com.br/2021/11/04/04160722090388.jpg" alt="">
 
+                        <div style="margin-left: 30px;"  class="card-body float-left">
+                            <h5 style="font-size: 29px; max-width:700px;" class="card-title">Suporte Técnico - Pau dos Ferros - RN</h5>
+                            <p style="font-size: 25px;" class="card-text text-success"><b>Quantidade de Vagas: <span>50</span></b></p>
+                            <p class="card-text">Empresa: Brisanet Telecomunicações<br>Levando o mundo até você.</p>
                         </div>
 
                     </div>
@@ -40,31 +34,13 @@
 
 
         <div style="max-width: 1600px; margin: auto;" class="card"> 
-            <br><h5 style="color: #C22637; margin-left: 10px;"><i style="font-size:20px;" class="fas fa-info-circle"></i> Informações do Produto</h5><br>
+            <h5 style="font-size: 35px; max-width:700px; margin: auto; margin-top: 20px;" class="card-title">Descrição da Vaga</h5>
 
             <div style="max-width: 1100px; text-align: justify;" class="card-body float-left">
-                {{ object.description|safe }}
+                Descrição aqui
             </div>
-            <div class="card-body">
-                <div class="mb-2 text-muted"><i class="fas fa-image"></i> Foto Real:</div>
-                <div class="chocolat-parent">
-                    <a href="/media/{{object.image}}" class="chocolat-image" title="Just an example">
-                        <div data-crop-image="485">
-                            <img alt="image" src="/media/{{object.image}}" class="img-fluid">
-                        </div>
-                    </a>
-                </div>
-                <br>
-                <div style="max-width: 230px;" class="mb-2 text-muted">
-                    {% if object.user.image %}
-                        <img class="float-left" style="border-radius: 50%; max-width: 50px;" class="card"src="/media/{{object.user.image}}" class="img-fluid"alt="">
-                    {% else %}
-                        <img class="float-left" style="border-radius: 50%; max-width: 40px;" class="card" src="{% static 'assets/img/avatar/avatar-1.png' %}" class="img-fluid"alt="">
-                    {% endif %}
-                    <p class="float-left text-danger"><b>Quem Postou:</b></p>
-                    <p class="float-right"> {{object.user.username}}</p>
-                </div><br>
-            </div>
+            <div class="card-body text-center">
+                <button class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></button>
         </div>
 
 
