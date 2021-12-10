@@ -95,13 +95,13 @@
                   <tbody>
                     {% for post in last_posts %}
                     <tr>
-                        <td>
-                          {{post.user.username}}
+                        <td style="color: rgb(31, 31, 31)">
+                          {{post.user.username|title}}
                         </td>
                         <td>
-                          <a style="color: rgb(31, 31, 31)" href="#">{{ post.title}}</a>
+                          <a style="color: rgb(31, 31, 31)" href="{% url 'detalhes_anuncio' post.slug %}">{{ post.title }}</a>
                         </td>
-                        <td>
+                        <td style="color: rgb(31, 31, 31)">
                           {{post.number_vacancies}}
                         </td>
                         
