@@ -72,3 +72,13 @@ class AnnouncementYourView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         queryset = Announcement.objects.filter(user = self.request.user)
         return queryset
+
+class AnnouncementListAllJobsViewSet(ListView):
+    model = Announcement
+    template_name = 'announcement/jobs.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data()
+        context['jobs'] = Announcement.objects.filter(type_vacancy = 'emprego').filter(active = True).order_by('-created')
+        return context
+

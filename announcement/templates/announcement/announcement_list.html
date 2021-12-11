@@ -118,7 +118,8 @@
                   <thead>
                     <tr>
                       <th>Empresa</th>
-                      <th>Vaga</th>
+                      <th>Tipo</th>
+                      <th>Descrição</th>
                       <th>Quantidade de Vagas</th>
                     </tr>
                   </thead>
@@ -128,6 +129,13 @@
                         <td style="color: rgb(31, 31, 31)">
                           <img src="/media/{{post.user.image}}" width="50" class="mr-3" alt="avatar">
                           {{post.user.username|title}}
+                        </td>
+                        <td style="color: rgb(31, 31, 31)">
+                          {% if post.type_vacancy == 'estagio' %}
+                            <a style="color: rgb(31, 31, 31)" href="{% url 'vagas_empregos' %}">{{post.type_vacancy|title}}</a>
+                          {% else %}
+                            <a style="color: rgb(31, 31, 31)" href="{% url 'vagas_empregos' %}">{{post.type_vacancy|title}}</a>
+                          {% endif %}
                         </td>
                         <td>
                           <div style="margin-top: 1.9%; margin-bottom: -3%;" class="info">
