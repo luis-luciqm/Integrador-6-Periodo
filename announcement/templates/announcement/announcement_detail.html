@@ -55,7 +55,11 @@
                     </ul>
                 {% endif %}
                 
+                {% if request.user != anuncio.user or not request.user.is_authenticated %}
                 <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
+                {% elif request.user == anuncio.user %}
+                <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anuncio</b></a>
+                {% endif %}
             </div>
         </div>
 
