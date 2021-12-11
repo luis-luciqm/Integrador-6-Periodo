@@ -212,15 +212,16 @@
 
             <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
+              {% if perms.announcement.add_announcement %}
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                  {% if perms.announcement.add_announcement %}
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   <li><a class="nav-link" href="{% url 'seus_anuncios' %}">Seus Anúncios</a></li>
-                  {% endif %}
+                  
                 </ul>
               </li>
+              {% endif %}
               <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-address-card"></i><span>Vagas</span></a>
                 <ul class="dropdown-menu">
@@ -236,17 +237,12 @@
                 </ul>
               </li> 
               {% endif %}
-
+              {% if not perms.announcement.add_announcement %}
               <li class="nav-item dropdown">
                 <a href="{% url 'seja_anunciante' %}" class="nav-link"><i class="fas fa-handshake"></i><span>Seja um Anunciante</span></a>
               </li>
+              {% endif %}
             </ul>
-
-
-
-            
-
-
 
             <hr><div class="mt-4 mb-4 p-3 hide-sidebar-mini">
               <a target="_blank" href="https://demo.getstisla.com/" class="btn btn-primary btn-lg btn-block btn-icon-split">

@@ -20,6 +20,5 @@ class AnnouncementForm(forms.ModelForm):
         self.fields['description'].widget.attrs['class'] = 'form-control'
         self.fields['number_vacancies'].widget.attrs['class'] = 'form-control'
         self.fields['city'].widget.attrs['class'] = 'form-control'
-        self.fields['image'].widget.attrs['class'] = 'form-control'
         self.fields['money'].widget.attrs['class'] = 'form-control'
         self.fields['type_vacancy'].widget.attrs['class'] = 'form-control'
