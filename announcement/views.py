@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.edit import UpdateView
 
 from announcement.models import Announcement, City
+from authentication.models import User
 from .forms import AnnouncementForm
 # Create your views here.
 
@@ -23,6 +24,8 @@ class AnnouncementListView(ListView):
         context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio').count()
         context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego').count()
         context['last_posts'] = Announcement.objects.all().order_by('-created')[:7]
+        context['tot_users'] = User.objects.all().count()
+        context['tot_empresas'] = User.objects.filter(groups__name__in=['Empresa']).count()
         
         return context
     
