@@ -1,17 +1,31 @@
+{% extends 'base.html' %}
 {% load static %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p}}
 
-    <input type="submit" value="Mandar">
-</form>
+{% block content %}
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>Venha ser um Anunciante!!!</h1>
+            </div>
 
-{% endif %}
+            <div class="section-body">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p}}
+
+                    <input type="submit" value="Mandar">
+                </form>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+    
+{% endblock content %} 
