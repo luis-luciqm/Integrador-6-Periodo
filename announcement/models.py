@@ -15,7 +15,6 @@ class Announcement(models.Model):
     number_vacancies = models.IntegerField()
     city = models.ForeignKey(City, blank=True, on_delete=models.SET_NULL, related_name="city_announcement", null=True)
     email = models.EmailField()
-    image = models.ImageField(upload_to='announces/img',blank=True,null=True,max_length=255)
     money = models.IntegerField(default=0)
     
     created = models.DateTimeField(auto_now_add=True)
@@ -43,4 +42,3 @@ class Announcement(models.Model):
 class ParticipateAnnounce(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_partcipate")
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE,related_name="announcement_participate")
-    curriculum = models.FileField(upload_to='users/curriculos/',null=False,max_length=None)

@@ -47,7 +47,14 @@
                 {{anuncio.description|safe}}
             </div>
             <div class="card-body text-center">
-                <button class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></button>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
             </div>
         </div>
 

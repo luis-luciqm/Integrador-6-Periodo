@@ -1,13 +1,14 @@
 
+from django.contrib import messages
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import UpdateView
 
-from announcement.models import Announcement, City
+from announcement.models import Announcement, City, ParticipateAnnounce
 from authentication.models import User
 from .forms import AnnouncementForm
 # Create your views here.
@@ -72,3 +73,11 @@ class AnnouncementYourView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         queryset = Announcement.objects.filter(user = self.request.user)
         return queryset
+    
+def ParticipateAnnounceFun(request, pk):
+    anounce = Announcement.objects.get(pk=pk)
+    if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
+        ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
+    else:
+        messages.error(request, "Você ja se candidatou a está vaga")
+    return redirect(f'/anuncio/detalhes_anuncio/{anounce.slug}')

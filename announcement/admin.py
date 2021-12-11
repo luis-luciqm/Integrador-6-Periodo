@@ -11,5 +11,5 @@ admin.site.register(City,CityAdmin)
 
 
 class ParticipateAnnounceAdmin(admin.ModelAdmin):
-    list_display = ['user','announcement', 'curriculum']
+    list_display = ['user','announcement']
 admin.site.register(ParticipateAnnounce,ParticipateAnnounceAdmin)
