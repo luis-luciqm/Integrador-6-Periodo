@@ -32,6 +32,7 @@ urlpatterns = [
     path('', AnnouncementListView.as_view(), name="listar_anuncios"),
     path('api/', schema_view, name='schema-swagger-ui'),
     path('api/anuncio/', include('announcement.api.urls')),
+    path('api/accounts/', include('accounts.api.urls')),
     path('accounts/', include('accounts.urls')),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
