@@ -10,7 +10,7 @@ class AnnouncementForm(forms.ModelForm):
 
     class Meta:
         model = Announcement
-        exclude = ['created', 'updated', 'user', 'email']
+        exclude = ['created', 'updated', 'user', 'email','active']
         
     def __init__(self, *args, **kwargs):
         super(AnnouncementForm, self).__init__(*args, **kwargs)
