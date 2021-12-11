@@ -53,6 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     
     city = models.ForeignKey(City,related_name="city_user", null=True, on_delete= models.SET_NULL)
+    curriculum = models.FileField(upload_to='users/curriculos/',null=True,max_length=None)
     
     objects = UserManager()
     
