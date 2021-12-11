@@ -47,6 +47,13 @@
                       </div>
 
                       <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Cidade</label>
+                        <div class="col-sm-12 col-md-7">
+                          {{ form.city }}
+                        </div>
+                      </div>
+
+                      <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                         <div class="col-sm-12 col-md-7">
                           {{ form.email }}
@@ -85,6 +92,7 @@
   document.querySelector('#id_username').classList.add('form-control')
   document.querySelector('#id_fullname').classList.add('form-control')
   document.querySelector('#id_email').classList.add('form-control')
+  document.querySelector('#id_city').classList.add('form-control')
 </script>
 
 {% endblock content %}

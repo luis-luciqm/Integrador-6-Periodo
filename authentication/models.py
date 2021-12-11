@@ -4,6 +4,15 @@ from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager, Group, PermissionsMixin)
 
 # Create your models here.
+
+class City (models.Model):
+    name = models.CharField(max_length=200)
+    estado = models.CharField(max_length=200)
+    class Meta:
+        verbose_name = "Cidade"
+
+    def __str__(self):
+        return self.name + ' / ' + self.estado
 class UserManager(BaseUserManager):
     
     def create_user(self, username,email,password=None):
@@ -43,6 +52,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     
+    city = models.ForeignKey(City,related_name="city_user", null=True, on_delete= models.SET_NULL)
+    
     objects = UserManager()
     
     USERNAME_FIELD = 'email'
@@ -53,4 +64,5 @@ class User(AbstractBaseUser, PermissionsMixin):
             'refresh': str(refresh),
             'access': str(refresh.access_token)
         }
+
 

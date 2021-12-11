@@ -60,7 +60,7 @@ class AnnouncementUpdateView(PermissionRequiredMixin,LoginRequiredMixin,UpdateVi
     form_class = AnnouncementForm
     template_name = 'announcement/form-create-anuncio.html'
     success_url = '/'
-    permission_required = ('announcement.add_announcement')
+    permission_required = ('announcement.change_announcement')
     queryset = Announcement.objects.all()
     lookup_field = 'slug'
 

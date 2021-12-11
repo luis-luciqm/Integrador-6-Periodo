@@ -9,7 +9,7 @@ class UserForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ['email', 'username','fullname', 'password1', 'password2']
+        fields = ['email', 'username','fullname', 'city', 'password1', 'password2']
         
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -20,6 +20,7 @@ class UserForm(UserCreationForm):
         self.fields['fullname'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+        self.fields['city'].widget.attrs['class'] = 'form-control'
         
         
 class SolicitationForm(forms.ModelForm):
