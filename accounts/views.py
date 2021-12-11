@@ -96,6 +96,13 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
         solicitation = form.save(commit=False)
         solicitation.user = self.request.user
         return super().form_valid(form)
+    
+    def get_context_data(self):
+        context = super().get_context_data()
+        if Solicitation.objects.filter(user=self.request.user).exists():
+            messages.error(self.request,"Você ja fez uma solicitação de anunciante, por favor aguarde a resposta de nossos administradores")
+        return context
+            
 
 class UserEditView(LoginRequiredMixin, UpdateView):
     model = User

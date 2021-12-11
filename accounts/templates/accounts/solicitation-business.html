@@ -1,7 +1,17 @@
 {% load static %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% else %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p}}
 
     <input type="submit" value="Mandar">
 </form>
+
+{% endif %}

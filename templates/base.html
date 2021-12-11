@@ -213,7 +213,7 @@
             <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
                   {% if perms.announcement.add_announcement %}
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
@@ -222,7 +222,7 @@
                 </ul>
               </li>
               <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Vagas</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-address-card"></i><span>Vagas</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="index-0.html">Empregos</a></li>
                   <li><a class="nav-link" href="index.html">Estágios</a></li>
@@ -236,6 +236,10 @@
                 </ul>
               </li> 
               {% endif %}
+
+              <li class="nav-item dropdown">
+                <a href="{% url 'seja_anunciante' %}" class="nav-link"><i class="fas fa-handshake"></i><span>Seja um Anunciante</span></a>
+              </li>
             </ul>
 
 
