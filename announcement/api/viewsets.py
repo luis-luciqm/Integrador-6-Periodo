@@ -10,4 +10,10 @@ class AnnouncementListViewSet(generics.ListAPIView):
     
 class AnnouncementCreateViewSet(generics.CreateAPIView):
     serializer_class = AnnouncementSereializer
+
+class AnnouncementListActiveViewSet(generics.ListAPIView):
+    serializer_class = AnnouncementSereializer
+
+    def get_queryset(self):
+        return Announcement.objects.filter(active = True)
     
