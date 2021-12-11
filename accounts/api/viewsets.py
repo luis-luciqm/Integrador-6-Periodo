@@ -8,3 +8,6 @@ class CompanyListViewSet(generics.ListAPIView):
     def get_queryset(self):
         queryset = User.objects.filter(groups__name__in=['Empresa'])
         return queryset
+
+class CompanyCreateViewSet(generics.CreateAPIView):
+    serializer_class = CompanySerializer
