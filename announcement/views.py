@@ -78,6 +78,7 @@ def ParticipateAnnounceFun(request, pk):
     anounce = Announcement.objects.get(pk=pk)
     if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
         ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
+        messages.success(request, "Você agora está concorrendo a vaga")
     else:
         messages.error(request, "Você ja se candidatou a está vaga")
     return redirect(f'/anuncio/detalhes_anuncio/{anounce.slug}')
