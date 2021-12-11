@@ -225,7 +225,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-address-card"></i><span>Vagas</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{% url 'vagas_empregos' %}">Empregos</a></li>
-                  <li><a class="nav-link" href="index.html">Estágios</a></li>
+                  <li><a class="nav-link" href="{% url 'vagas_estagio' %}">Estágios</a></li>
                 </ul>
               </li>  
               {% if perms.accounts.view_solicitation %}

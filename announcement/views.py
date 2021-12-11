@@ -82,3 +82,11 @@ class AnnouncementListAllJobsViewSet(ListView):
         context['jobs'] = Announcement.objects.filter(type_vacancy = 'emprego').filter(active = True).order_by('-created')
         return context
 
+class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
+    model = Announcement
+    template_name = 'announcement/phases.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        context['phases'] = Announcement.objects.filter(type_vacancy = 'estagio').filter(active = True).order_by('-created')
+        return context
