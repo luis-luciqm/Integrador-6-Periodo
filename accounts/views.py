@@ -106,7 +106,7 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
 
 class UserEditView(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ['username', 'fullname', 'city', 'email', 'image']
+    fields = ['username', 'fullname', 'city', 'curriculum', 'email', 'image']
     success_url = '/'
     template_name = 'accounts/edit-user.html'
 

@@ -61,18 +61,26 @@
                       </div> 
 
                       <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Imagem:</label>
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Anexe seu curriculo</label>
+                        <div class="col-sm-12 col-md-7">
+                          {{ form.curriculum }}
+                        </div>
+                      </div> 
+
+                      <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Imagens:</label>
                         <div class="col-sm-12 col-md-3">
                           <div id="image-preview" class="image-preview"
                             {% if form.image.value %}   
                               style="background-image: url('/media/{{ form.image.value }}'); width: 250px;height: 250px;
                               background-size: cover;background-position: center center;"  
-                            {% endif %}>
-                            <label for="image-upload" id="image-label">Escolher Imagem Site</label>
+                            {% endif %} 
+                          >
+                            <label for="image-upload" id="image-label">Imagem Perfil</label>
                             <input type="file" name="image" id="image-upload"  />
                           </div>
                         </div>
-                      </div>  
+                      </div>
 
                       <div class="form-group row mb-4">
                           <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
@@ -87,12 +95,34 @@
     </div>
 </div>
 
+<script src="{% static 'node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js' %}"></script>
+<script src="{% static 'node_modules/jquery_upload_preview/assets/js/jquery.uploadPreview.min.js' %}"></script>
+<script src="{% static 'node_modules/nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'node_modules/chart.js/dist/Chart.min.js' %}"></script>
+<script src="{% static 'node_modules/jqvmap/dist/jquery.vmap.min.js' %}"></script>
+<script src="{% static 'node_modules/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+<script type="text/javascript">
+$.uploadPreview({
+        input_field: "#image-upload",   // Default: .image-upload
+        preview_box: "#image-preview",  // Default: .image-preview
+        label_field: "#image-label",    // Default: .image-label
+        label_default: "Choose File",   // Default: Choose File
+        label_selected: "Perfil",  // Default: Change File
+        no_label: false,                // Default: false
+        success_callback: null,          // Default: null
+      });
+</script>
+
 <script>
+  
   document.querySelector('#id_username').classList.add('form-control')
   document.querySelector('#id_fullname').classList.add('form-control')
   document.querySelector('#id_email').classList.add('form-control')
   document.querySelector('#id_city').classList.add('form-control')
+  document.querySelector('#id_curriculum').classList.add('form-control')
 </script>
 
 {% endblock content %}
-    
+
+
+
