@@ -9,23 +9,30 @@
                 <h1>Venha ser um Anunciante!!!</h1>
             </div>
 
-            <div class="section-body">
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p}}
+            <div class="card card-primary">
+                <div class="card-body">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="text-muted">Descrava-nos o porque você quer ser um anunciante.</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p}}
 
-                    <input type="submit" value="Mandar">
-                </form>
-                {% endif %}
+                        <input class="btn btn-primary" type="submit" value="Mandar">
+                    </form>
+                    {% endif %}
+                </div>
             </div>
         </section>
     </div>
+
+    <script>
+        document.querySelector('#id_description').classList.add('form-control')
+    </script>
     
 {% endblock content %} 

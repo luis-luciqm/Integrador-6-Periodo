@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from announcement.models import Announcement, City, ParticipateAnnounce
 from authentication.models import User
 from .forms import AnnouncementForm
+from django.urls.base import reverse_lazy
 # Create your views here.
 
 class AnnouncementListView(ListView):
@@ -60,10 +61,14 @@ class AnnouncementUpdateView(PermissionRequiredMixin,LoginRequiredMixin,UpdateVi
     model = Announcement
     form_class = AnnouncementForm
     template_name = 'announcement/form-create-anuncio.html'
-    success_url = '/'
     permission_required = ('announcement.change_announcement')
     queryset = Announcement.objects.all()
     lookup_field = 'slug'
+    
+    def get_success_url(self,**kwargs):
+        messages.success(self.request,f'Anuncio ({self.kwargs["slug"]}) editado com sucesso!')
+        return reverse_lazy('seus_anuncios')
+        
 
 class AnnouncementYourView(LoginRequiredMixin,ListView):
     model = Announcement
