@@ -24,6 +24,13 @@
                 <div class="card-header">
                   <h4>Edite seus dados</h4>
                 </div>
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                  {% endif %}
                 <div class="card-body">
                   <form method="post" action="{% url 'editar_usuario' %}" enctype="multipart/form-data">
                       <div class="form-group row mb-4">

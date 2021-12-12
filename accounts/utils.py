@@ -6,6 +6,7 @@ from accounts.forms import UserForm2
 from accounts.models import Solicitation
 from django.contrib.auth.models import Group, Permission
 from authentication.models import *
+from django.contrib import messages
 
 def ApproveSolicitation(request, pk):
     solicitation = Solicitation.objects.get(pk=pk)
@@ -30,6 +31,8 @@ def update_profile(request):
             if form.is_valid():
                 form.save()
                 return redirect('/')
+            else:
+                messages.error(request,f'{form.errors}')
         else:
             form = UserForm2()
 
