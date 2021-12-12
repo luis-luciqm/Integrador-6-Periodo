@@ -20,16 +20,19 @@ def ApproveSolicitation(request, pk):
     return redirect('/accounts/listar_solicitacoes/')
 
 def update_profile(request):
-    args = {}
-    if request.method == 'POST':
-        form = UserForm2(request.POST or None, request.FILES or None,instance = request.user, )
-        form.actual_user = request.user
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = UserForm2()
+    if request.user.is_authenticated:
+        args = {}
+        if request.method == 'POST':
+            form = UserForm2(request.POST or None, request.FILES or None,instance = request.user, )
+            form.actual_user = request.user
+            if form.is_valid():
+                form.save()
+                return redirect('/')
+        else:
+            form = UserForm2()
 
-    args['form'] = form
-    return render(request, 'accounts/edit-user.html', args)
+        args['form'] = form
+        return render(request, 'accounts/edit-user.html', args)
+    else:
+        return redirect('/accounts/login/?next=/accounts/editar_usuario')
     
