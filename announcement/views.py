@@ -104,6 +104,7 @@ class AnnouncementListByCompanyViewSet(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).order_by('-created')
+        context['user_company'] = User.objects.get(id = self.kwargs['id'])
         return context
     
 def ParticipateAnnounceFun(request, pk):
