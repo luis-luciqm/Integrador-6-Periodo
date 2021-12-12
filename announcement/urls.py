@@ -7,5 +7,6 @@ urlpatterns = [
     path('editar_anuncio/<slug:slug>/', AnnouncementUpdateView.as_view(), name="editar_anuncio"),
     path('vagas_empregos/', AnnouncementListAllJobsViewSet.as_view(), name="vagas_empregos"),
     path('vagas_estagio/', AnnouncementListAllPhasesViewSet.as_view(), name='vagas_estagio'),
+    path('listagem_pela_empresa/<int:id>/', AnnouncementListByCompanyViewSet.as_view(), name='listagem_pela_empresa'),
     
 ]

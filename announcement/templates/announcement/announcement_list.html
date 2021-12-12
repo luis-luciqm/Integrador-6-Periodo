@@ -118,7 +118,7 @@
                   <thead>
                     <tr>
                       <th>Empresa</th>
-                      <th>Tipo</th>
+                      <th>Tipo da Vaga</th>
                       <th>Descrição</th>
                       <th>Quantidade de Vagas</th>
                     </tr>
@@ -128,7 +128,7 @@
                     <tr>
                         <td style="color: rgb(31, 31, 31)">
                           <img src="/media/{{post.user.image}}" width="50" class="mr-3" alt="avatar">
-                          {{post.user.username|title}}
+                          <a style="color: rgb(31, 31, 31)" href="{% url 'listagem_pela_empresa' post.user.id %}">{{post.user.username|title}}</a>
                         </td>
                         <td style="color: rgb(31, 31, 31)">
                           {% if post.type_vacancy == 'estagio' %}
