@@ -84,23 +84,23 @@
 
       <div class="row">
         {% for emprego in announcements %}
-
-        <div class="col-12 col-md-6 col-lg-6">
-          <div class="card">
-            <div class="card-header">
-              <h4>Vaga de {{emprego.type_vacancy|title}}</h4>
-              <div class="card-header-action">
-                <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
-                  Detalhes
-                </a>
+          {% if emprego.city.id == request.user.city.id %}
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h4>Vaga de {{emprego.type_vacancy|title}}</h4>
+                <div class="card-header-action">
+                  <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
+                    Detalhes
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <p>{{emprego.title}}</p>
               </div>
             </div>
-            <div class="card-body">
-              <p>{{emprego.title}}</p>
-            </div>
           </div>
-        </div>
-
+          {% endif %}
         {% endfor %}
       </div>
 

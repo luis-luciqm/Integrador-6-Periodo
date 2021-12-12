@@ -17,8 +17,11 @@ from django.urls.base import reverse_lazy
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
-    queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio')).filter(active = True)[:4]
     context_object_name = 'announcements'
+
+    def get_queryset(self):
+        queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio')).filter(active = True)
+        return queryset
     
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
