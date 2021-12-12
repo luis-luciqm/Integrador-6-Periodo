@@ -6,8 +6,9 @@ from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import UpdateView
-
-from announcement.models import Announcement, City
+from django.contrib import messages
+from django.shortcuts import redirect
+from announcement.models import Announcement, City, ParticipateAnnounce
 from authentication.models import User
 from .forms import AnnouncementForm
 # Create your views here.
@@ -99,3 +100,18 @@ class AnnouncementListByCompanyViewSet(ListView):
         context = super().get_context_data(**kwargs)
         context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).order_by('-created')
         return context
+    
+def ParticipateAnnounceFun(request, pk):
+    anounce = Announcement.objects.get(pk=pk)
+    if request.user.is_authenticated:
+        if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
+            if not anounce.user == request.user:
+                ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
+                messages.success(request, "Você agora está concorrendo a vaga.")
+            else:
+                messages.error(request, "Você não pode se candidatar há uma vaga que você mesmo criou.")
+        else:
+            messages.error(request, "Você ja se candidatou a está vaga.")
+        return redirect(f'/anuncio/detalhes_anuncio/{anounce.slug}')
+    else:
+        return redirect(f'/accounts/login/?next=/anuncio/detalhes_anuncio/{anounce.slug}')

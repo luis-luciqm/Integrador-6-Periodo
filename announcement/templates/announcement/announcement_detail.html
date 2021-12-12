@@ -47,8 +47,20 @@
                 {{anuncio.description|safe}}
             </div>
             <div class="card-body text-center">
-                <a class="btn btn-primary btn-lg" href="{% url 'editar_anuncio' anuncio.slug %}">Editar Anuncio</a>
-                <button class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></button>
+
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if request.user != anuncio.user or not request.user.is_authenticated %}
+                <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
+                {% elif request.user == anuncio.user %}
+                <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anuncio</b></a>
+                {% endif %}
             </div>
         </div>
 

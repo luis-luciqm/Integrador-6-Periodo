@@ -1,5 +1,7 @@
 from django.urls.conf import path
 from django.contrib.auth.views import LogoutView
+
+from announcement.views import ParticipateAnnounceFun
 from .views import *
 from django.contrib.auth import views as auth_views
 from .utils import *
@@ -21,5 +23,6 @@ urlpatterns = [
     path('seja_anunciante/',  UserBusinessView.as_view(), name='seja_anunciante'),
     path('listar_solicitacoes/', ListSolicitationView.as_view(), name= 'listar_solicitacoes'),
     path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao'),
-    path('editar_usuario/<int:pk>/', UserEditView.as_view(), name='editar_usuario')
+    path('editar_usuario/<int:pk>/', UserEditView.as_view(), name='editar_usuario'),
+    path('participar_anuncio/<int:pk>/', ParticipateAnnounceFun, name="participar_anuncio"),
 ]
