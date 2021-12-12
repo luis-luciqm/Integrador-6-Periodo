@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="main-content">
@@ -127,7 +128,11 @@
                     {% for post in last_posts %}
                     <tr>
                         <td style="color: rgb(31, 31, 31)">
-                          <img src="/media/{{post.user.image}}" width="50" class="mr-3" alt="avatar">
+                          {% if post.user.image %}
+                            <img src="/media/{{post.user.image}}" width="50" class="mr-3" alt="avatar">
+                          {% else %}
+                            <img alt="image" width="45" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-4">
+                          {% endif %}
                           <a style="color: rgb(31, 31, 31)" href="{% url 'listagem_pela_empresa' post.user.id %}">{{post.user.username|title}}</a>
                         </td>
                         <td style="color: rgb(31, 31, 31)">
