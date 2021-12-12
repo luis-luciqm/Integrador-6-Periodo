@@ -10,8 +10,6 @@ def ApproveSolicitation(request, pk):
     my_group, created = Group.objects.get_or_create(name='Empresa') 
     permission = Permission.objects.get(codename = 'add_announcement')
     my_group.permissions.add(permission)
-    permission = Permission.objects.get(codename = 'change_announcement')
-    my_group.permissions.add(permission)
     
     solicitation.user.groups.add(my_group)
     solicitation.save()

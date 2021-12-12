@@ -22,18 +22,23 @@ from rest_framework_swagger.views import get_swagger_view
 from django.contrib.auth import views as auth_views
 
 from announcement.views import AnnouncementListView
+from rest_framework import permissions
 schema_view = get_swagger_view(title='RN Empregos')
 # from account.views import AccountList
 
+
 urlpatterns = [
+    # path('administracao_django/admin/', admin.site.urls),
     path('admin/', admin.site.urls),
-    path('api/autenticacao/', include('authentication.urls')),
+    path('accounts/', include('accounts.urls')),
     path('anuncio/', include('announcement.urls')),
+    #RAIZ
     path('', AnnouncementListView.as_view(), name="listar_anuncios"),
+    #API
     path('api/', schema_view, name='schema-swagger-ui'),
     path('api/anuncio/', include('announcement.api.urls')),
     path('api/accounts/', include('accounts.api.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('api/autenticacao/', include('authentication.urls')),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     
