@@ -5,6 +5,7 @@ from django.urls.base import reverse
 from accounts.forms import UserForm2
 from accounts.models import Solicitation
 from django.contrib.auth.models import Group, Permission
+from authentication.models import *
 
 def ApproveSolicitation(request, pk):
     solicitation = Solicitation.objects.get(pk=pk)
@@ -22,6 +23,7 @@ def ApproveSolicitation(request, pk):
 def update_profile(request):
     if request.user.is_authenticated:
         args = {}
+        citys = City.objects.all()
         if request.method == 'POST':
             form = UserForm2(request.POST or None, request.FILES or None,instance = request.user, )
             form.actual_user = request.user
@@ -32,6 +34,7 @@ def update_profile(request):
             form = UserForm2()
 
         args['form'] = form
+        args['citys'] = citys
         return render(request, 'accounts/edit-user.html', args)
     else:
         return redirect('/accounts/login/?next=/accounts/editar_usuario')
