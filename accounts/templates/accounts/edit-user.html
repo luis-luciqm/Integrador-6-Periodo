@@ -25,7 +25,7 @@
                   <h4>Edite seus dados</h4>
                 </div>
                 <div class="card-body">
-                  <form method="post" enctype="multipart/form-data">
+                  <form method="post" action="{% url 'editar_usuario' %}" enctype="multipart/form-data">
                       <div class="form-group row mb-4">
                         <div class="col-sm-12 col-md-7">
                             {% csrf_token %}
@@ -114,12 +114,17 @@ $.uploadPreview({
 </script>
 
 <script>
-  
   document.querySelector('#id_username').classList.add('form-control')
   document.querySelector('#id_fullname').classList.add('form-control')
   document.querySelector('#id_email').classList.add('form-control')
   document.querySelector('#id_city').classList.add('form-control')
   document.querySelector('#id_curriculum').classList.add('form-control')
+
+  document.getElementById('id_username').value = '{{request.user.username}}'
+  document.getElementById('id_fullname').value = '{{request.user.fullname}}'
+  document.getElementById('id_email').value = '{{request.user.email}}'
+
+  
 </script>
 
 {% endblock content %}

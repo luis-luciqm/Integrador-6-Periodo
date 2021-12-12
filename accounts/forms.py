@@ -1,5 +1,6 @@
 from django import forms
-from authentication.models import User
+from django.forms.fields import ImageField
+from authentication.models import City, User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from .models import *
@@ -29,5 +30,17 @@ class SolicitationForm(forms.ModelForm):
         model = Solicitation
         fields = ['description']
         
+        
+class UserForm2(forms.ModelForm):
+    email = forms.EmailField()
+    username = forms.CharField()
+    fullname = forms.CharField()
+    city = forms.ModelChoiceField(queryset=City.objects.all(), required=False)
+    image= forms.ImageField()
+    curriculum = forms.FileField(required=False)
+    
+    class Meta:
+        model = User
+        fields = ['email', 'username','fullname', 'city', 'image', 'curriculum']
         
 # class PasswordResetForm():

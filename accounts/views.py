@@ -104,9 +104,16 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
         return context
             
 
-class UserEditView(LoginRequiredMixin, UpdateView):
-    model = User
-    fields = ['username', 'fullname', 'city', 'curriculum', 'email', 'image']
-    success_url = '/'
-    template_name = 'accounts/edit-user.html'
+# class UserEditView(LoginRequiredMixin, UpdateView):
+#     model = User
+#     fields = ['username', 'fullname', 'city', 'curriculum', 'email', 'image']
+#     success_url = '/'
+#     template_name = 'accounts/edit-user.html'
+        
+#     def get_context_data(self, **kwargs):
+#         co
+#         if self.request.user.id != self.kwargs['pk']:
+#             print('oi')
+            
+#         return redirect('/')
 
