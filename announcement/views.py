@@ -120,12 +120,12 @@ def ParticipateAnnounceFun(request, pk):
         if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
             if not anounce.user == request.user:
                 p = ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
-                messages.success(request, "Você agora está concorrendo a vaga.")
+                messages.success(request, "Você agora está concorrendo a vaga. Boa sorte!!")
                 Notification.objects.create(participate=p, text=f'Uma nova pessoa se candidatou para o anuncio: {anounce.title}')
             else:
                 messages.error(request, "Você não pode se candidatar há uma vaga que você mesmo criou.")
         else:
-            messages.error(request, "Você ja se candidatou a está vaga.")
+            messages.error(request, "Você ja se candidatou a esta vaga.")
         return redirect(f'/anuncio/detalhes_anuncio/{anounce.slug}')
     else:
         return redirect(f'/accounts/login/?next=/anuncio/detalhes_anuncio/{anounce.slug}')

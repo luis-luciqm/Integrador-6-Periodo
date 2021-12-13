@@ -12,6 +12,13 @@
         <div class="breadcrumb-item">All Posts</div>
         </div>
     </div>
+    {% if messages %}
+        <ul style="margin-left: -40px;" class="messages">
+            {% for message in messages %}
+            <li style="text-align: center;" {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}><b>{{ message }}</b></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="section-body">
         <div class="row">
             <div class="col-12">
@@ -47,15 +54,6 @@
                 {{anuncio.description|safe}}
             </div>
             <div class="card-body text-center">
-
-                {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                        <li {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
                 {% if request.user != anuncio.user or not request.user.is_authenticated %}
                 <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
                 {% elif request.user == anuncio.user %}

@@ -12,13 +12,13 @@
             <div class="card card-primary">
                 <div class="card-body">
                     {% if messages %}
-                    <ul class="messages">
+                    <ul style="margin-left: -40px;" class="messages">
                         {% for message in messages %}
-                        <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                        <li style="text-align: center;" {% if message.tags %} class="alert alert-danger"{% endif %}><b>{{ message }}</b></li>
                         {% endfor %}
                     </ul>
                     {% else %}
-                    <p class="text-muted">Descrava-nos o porque você quer ser um anunciante.</p>
+                    <p class="text-muted">Descreva-nos o porque você quer ser um anunciante.</p>
                     <form action="" method="post">
                         {% csrf_token %}
                         {{ form.as_p}}
