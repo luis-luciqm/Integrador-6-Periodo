@@ -95,6 +95,8 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         solicitation = form.save(commit=False)
         solicitation.user = self.request.user
+        solicitation.save()
+        Notification.objects.create(solicitation=solicitation, text='Você tem uma nova solicitação para avaliar!')
         return super().form_valid(form)
     
     def get_context_data(self):

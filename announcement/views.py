@@ -8,12 +8,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.edit import UpdateView
 from django.contrib import messages
 from django.shortcuts import redirect
+from accounts.models import Notification
 from announcement.models import Announcement, City, ParticipateAnnounce
 from authentication.models import User
 from .forms import AnnouncementForm
 from django.urls.base import reverse_lazy
 # Create your views here.
-
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
@@ -29,6 +29,10 @@ class AnnouncementListView(ListView):
         context['tot_users'] = User.objects.all().count()
         context['tot_empresas'] = User.objects.filter(groups__name__in=['Empresa']).count()
         
+        if self.request.user.username: 
+            if self.request.user.groups.filter(name = 'admin'):
+                context['notifications_solicitation'] = Notification.objects.filter(participate = None ).order_by('-created')
+            context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user).order_by('-created')     
         return context
     
 
@@ -111,8 +115,9 @@ def ParticipateAnnounceFun(request, pk):
     if request.user.is_authenticated:
         if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
             if not anounce.user == request.user:
-                ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
+                p = ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
                 messages.success(request, "Você agora está concorrendo a vaga.")
+                Notification.objects.create(participate=p, text=f'Uma nova pessoa se candidatou para o anuncio: {anounce.title}')
             else:
                 messages.error(request, "Você não pode se candidatar há uma vaga que você mesmo criou.")
         else:
