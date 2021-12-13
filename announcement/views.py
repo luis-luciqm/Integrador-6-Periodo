@@ -17,8 +17,11 @@ from django.urls.base import reverse_lazy
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
-    queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio')).filter(active = True)[:4]
     context_object_name = 'announcements'
+
+    def get_queryset(self):
+        queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio')).filter(active = True)
+        return queryset
     
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
@@ -108,6 +111,7 @@ class AnnouncementListByCompanyViewSet(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).order_by('-created')
+        context['user_company'] = User.objects.get(id = self.kwargs['id'])
         return context
     
 def ParticipateAnnounceFun(request, pk):
