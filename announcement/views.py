@@ -34,7 +34,7 @@ class AnnouncementListView(ListView):
         
         if self.request.user.username: 
             if self.request.user.groups.filter(name = 'admin'):
-                context['notifications_solicitation'] = Notification.objects.filter(participate = None ).order_by('-created')
+                context['notifications_solicitation'] = Notification.objects.filter(participate = None, solicitation__accept = False).order_by('-created')
             context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user).order_by('-created')     
         return context
     
