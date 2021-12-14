@@ -13,6 +13,7 @@ from announcement.models import Announcement, City, ParticipateAnnounce
 from authentication.models import User
 from .forms import AnnouncementForm
 from django.urls.base import reverse_lazy
+import datetime
 # Create your views here.
 class AnnouncementListView(ListView):
     model = Announcement
@@ -20,7 +21,7 @@ class AnnouncementListView(ListView):
     context_object_name = 'announcements'
 
     def get_queryset(self):
-        queryset = Announcement.objects.filter(Q(type_vacancy = 'emprego') | Q(type_vacancy = 'estagio')).filter(active = True)
+        queryset = Announcement.objects.all()[:8]
         return queryset
     
     def get_context_data(self):
@@ -28,14 +29,15 @@ class AnnouncementListView(ListView):
         context['citys'] = City.objects.all()
         context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio').filter(active = True).count()
         context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego').filter(active = True).count()
-        context['last_posts'] = Announcement.objects.filter(active = True).order_by('-created')[:7]
+        context['last_posts'] = Announcement.objects.filter(active = True).order_by('-created')[:4]
         context['tot_users'] = User.objects.all().count()
         context['tot_empresas'] = User.objects.filter(groups__name__in=['Empresa']).count()
         
-        if self.request.user.username: 
+        if self.request.user.username: #necessita do usuario está logado
             if self.request.user.groups.filter(name = 'admin'):
                 context['notifications_solicitation'] = Notification.objects.filter(participate = None, solicitation__accept = False).order_by('-created')
-            context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user).order_by('-created')     
+            context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user, created__date = datetime.date.today()).order_by('-created') 
+            context['announcements_city'] = Announcement.objects.filter(active = True, city = self.request.user.city)[:6]    
         return context
     
 
