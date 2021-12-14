@@ -101,8 +101,12 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
     
     def get_context_data(self):
         context = super().get_context_data()
-        if Solicitation.objects.filter(user=self.request.user).exists():
-            messages.error(self.request,"Você já fez uma solicitação de anunciante. Por favor, aguarde a resposta de nossos administradores!")
+        soli = Solicitation.objects.filter(user=self.request.user)
+        if soli.exists():
+            if soli.filter(accept = True):
+                messages.success(self.request,"Sua conta já foi aceita.")
+            else:
+                messages.error(self.request,"Você já fez uma solicitação de anunciante. Por favor, aguarde a resposta de nossos administradores!")
         return context
             
 
