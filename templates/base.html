@@ -110,10 +110,9 @@
             </div>
           </li>
           {% else %}
-          <li>
-            <a href="{% url 'login' %}" class="btn btn-success">
-              Login
-            </a>
+          <li style="margin-right: 15px;">
+            <img alt="image" width="35" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1">  
+            <div class="d-sm-none d-lg-inline-block"><a style="color: #fff;" href="{% url 'login' %}">Olá, Faça Login</a></div></a>
           </li>
           {% endif %}
         </ul>
