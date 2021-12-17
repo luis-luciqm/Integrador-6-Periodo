@@ -2985,12 +2985,12 @@ div.card-header.t > h4{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 38ch;
+  max-width: 80%;
 }    
 
 div.card-header.your > h4{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 30ch;
+  max-width: 60%;
 }
