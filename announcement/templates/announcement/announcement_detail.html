@@ -63,9 +63,9 @@
                 <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anúncio</b></a>
                 {% endif %}
                 {% if anuncio.active %}
-                    <button class="btn btn-danger btn-lg"><b>Desativar</b></button>
+                    <a href="{% url 'desativar_anuncio' anuncio.slug %}"><button class="btn btn-danger btn-lg"><b>Desativar</b></button></a>
                 {% else %}
-                    <button class="btn btn-success btn-lg"><b>Ativar</b></button>
+                    <a href="{% url 'ativar_anuncio' anuncio.slug %}"><button class="btn btn-success btn-lg"><b>Ativar</b></button></a>
                 {% endif %}
             </div>
         </div>

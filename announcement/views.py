@@ -131,3 +131,34 @@ def ParticipateAnnounceFun(request, pk):
         return redirect(f'/anuncio/detalhes_anuncio/{anounce.slug}')
     else:
         return redirect(f'/accounts/login/?next=/anuncio/detalhes_anuncio/{anounce.slug}')
+
+class AnnouncementEnableView(LoginRequiredMixin, ListView):
+    template_name = 'announcement/announcement_detail.html'
+    context_object_name = 'queryset'
+
+    def get_queryset(self):
+        anuncio = Announcement.objects.get(slug = self.kwargs['slug'])
+        anuncio.active = True
+        anuncio.save()
+        return anuncio
+    
+    def get_context_data(self, **kwargs):
+        anuncio = Announcement.objects.get(slug = self.kwargs['slug'])
+        context = super().get_context_data(**kwargs)
+        context['anuncio'] = anuncio
+        return context
+
+class AnnouncementDisableView(LoginRequiredMixin, ListView):
+    template_name = 'announcement/announcement_detail.html'
+    context_object_name = 'queryset'
+    def get_queryset(self):
+        anuncio = Announcement.objects.get(slug = self.kwargs['slug'])
+        anuncio.active = False
+        anuncio.save()
+        return anuncio
+    
+    def get_context_data(self, **kwargs):
+        anuncio = Announcement.objects.get(slug = self.kwargs['slug'])
+        context = super().get_context_data(**kwargs)
+        context['anuncio'] = anuncio
+        return context

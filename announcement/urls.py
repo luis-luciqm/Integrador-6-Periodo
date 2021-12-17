@@ -8,5 +8,8 @@ urlpatterns = [
     path('vagas_empregos/', AnnouncementListAllJobsViewSet.as_view(), name="vagas_empregos"),
     path('vagas_estagio/', AnnouncementListAllPhasesViewSet.as_view(), name='vagas_estagio'),
     path('listagem_pela_empresa/<int:id>/', AnnouncementListByCompanyViewSet.as_view(), name='listagem_pela_empresa'),
+    path('ativar_anuncio/<slug:slug>/', AnnouncementEnableView.as_view(), name='ativar_anuncio'),
+    path('desativar_anuncio/<slug:slug>/', AnnouncementDisableView.as_view(), name="desativar_anuncio"),
+
     
 ]
