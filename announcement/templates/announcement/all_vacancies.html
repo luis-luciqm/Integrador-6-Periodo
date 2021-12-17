@@ -9,31 +9,32 @@
           <div class="section-header-back">
             <a href="/" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
-          <h1>Estágios Disponíveis</h1>
+          <h1>Todas as Vagas de Emprego e Estágio Disponíveis</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-            <div class="breadcrumb-item">Estágios</div>
+            <div class="breadcrumb-item">Todas</div>
           </div>
         </div>
     </section>
     <div class="section-body">
+        
 
       <div class="row">
-        {% for estagio in phases %}
+        {% for emprego in all_vacancies %}
 
         <div class="col-12 col-md-6 col-lg-6">
           <div class="card">
             <div class="card-header t">
-              <h4>{{estagio.title}}</h4>
+              <h4>{{emprego.title}}</h4>
               <div class="card-header-action">
-                <a href="{% url 'detalhes_anuncio' estagio.slug %}" class="btn btn-primary">
+                <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
                   Detalhes
                 </a>
               </div>
             </div>
             <div class="card-body">
-              <p><img width="45" style="border-radius: 5px;" class="mr-2" src="/media/{{estagio.user.image}}" alt=""> {{estagio.user.fullname}} - {{estagio.number_vacancies}} Vagas</p>
-              <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{estagio.created|timesince}}</p>
+              <p><img width="45" style="border-radius: 5px;" class="mr-2" src="/media/{{emprego.user.image}}" alt=""> {{emprego.user.fullname}} - {{emprego.number_vacancies}} Vagas</p>
+              <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{emprego.created|timesince}}</p>
             </div>
           </div>
         </div>
