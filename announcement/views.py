@@ -33,7 +33,7 @@ class AnnouncementListView(ListView):
         context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego',active = True)
         for t in context['announces_estagio']:
             context['tot_announces_estagio'] += t.number_vacancies
-        print('\n\n\n\n', context['tot_announces_estagio'])
+        
         for t in context['announces_emprego']:
             context['tot_announces_emprego'] += t.number_vacancies
         context['last_posts'] = Announcement.objects.filter(active = True).order_by('-created')[:8]
