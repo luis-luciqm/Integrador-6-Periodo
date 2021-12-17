@@ -36,8 +36,8 @@
 
                         <div style="margin-left: 30px;"  class="card-body float-left">
                             <h5 style="font-size: 25px; max-width:650px;" class="card-title">{{anuncio.title}}</h5>
-                            <p style="font-size: 20px;" class="card-text"><i class="fas fa-business-time"></i> {{anuncio.user.fullname|title}}</p>
-                            <p style="font-size: 20px;" class="card-text"><i class="fas fa-city"></i> {{anuncio.city}}</p>
+                            <p style="font-size: 20px;" class="card-text"><i class="fas fa-business-time"></i> {{anuncio.user.fullname|title}} - {{anuncio.city}}</p>
+                            <p style="font-size: 20px;" class="card-text"><i class="far fa-money-bill-alt"></i> Remuneração de R$ {{anuncio.money}}</p>
                             <p style="font-size: 20px;" class="card-text text-success"><b><span><img style="width: 15px;" src="{% static 'img/vagas.png' %}" alt=""> {{anuncio.number_vacancies}}</span> Vagas Disponíveis</b></p>
                             <p style="font-size: 11px;"><i class="fas fa-stopwatch"></i> Postado há {{anuncio.created|timesince}}</p>
                         </div>
