@@ -14,6 +14,7 @@ from authentication.models import User
 from .forms import AnnouncementForm
 from django.urls.base import reverse_lazy
 import datetime
+from django.http import JsonResponse
 # Create your views here.
 class AnnouncementListView(ListView):
     model = Announcement
@@ -178,3 +179,14 @@ class AnnouncementDisableView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['anuncio'] = anuncio
         return context
+
+def search_auto_complete(request):
+    value = request.GET.get('city')
+    payload = []
+    if value:
+        citys = City.objects.filter(name__icontains = value)
+
+        for city in citys:
+            payload.append(city.name)
+
+    return JsonResponse({'status': 200, 'data': payload})

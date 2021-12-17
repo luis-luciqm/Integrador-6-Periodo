@@ -22,8 +22,12 @@
         <div class="card">
           <div class="card-header">
             <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
-              <input placeholder="Pesquise pela cidade, Tipo de vaga, Empresa, Salários" style="width: 50%;" type="text" name="search" class="form-control mr-3" id="id_search">
-              <button class="btn btn-primary" type="submit">Pesquisar</button>
+              
+              <div id="autocomplete">
+                <input class="autocomplete-input" />
+                <ul class="autocomplete-result-list"></ul>
+              </div>
+              
           </div>
         </div>
       </div>
@@ -60,3 +64,32 @@
 </div>
 
 {% endblock content %}
+
+{% block js_page %}
+
+  <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+
+  <script>
+
+    new Autocomplete('#autocomplete', {
+
+      search : input => {
+        console.log(input)
+
+        const url = `/anuncio/search/?city=${input}`
+        return new Promise(resolve => {
+          fetch(url).then(response => response.json()).then(data => {
+            console.log(data)
+            resolve(data.data)
+          })
+        })
+
+      },
+
+      onSubmit : result => {
+        window.open(`/anuncio/todas_as_vagas/?search=${result}`)
+      }
+
+    })
+  </script>
+{% endblock js_page %}

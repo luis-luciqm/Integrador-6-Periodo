@@ -7,7 +7,7 @@ from .utils import *
 class Announcement(models.Model):
     TYPE_VACANCY = (
         ('emprego', "Emprego"),
-        ('estagio', "Estágio")
+        ('estágio', "Estágio")
     )
     
     title = models.CharField(max_length=100)
