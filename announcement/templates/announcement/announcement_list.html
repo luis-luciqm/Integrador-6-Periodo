@@ -70,38 +70,6 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-12 col-md-12 col-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 style="margin: auto; font-size: 20px;">Vagas que podem ser do seu interesse</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row">
-        {% for emprego in announcements %}
-          <div class="col-12 col-md-6 col-lg-6">
-            <div class="card">
-              <div class="card-header t">
-                <h4>{{emprego.title}}</h4>
-                <div class="card-header-action">
-                  <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
-                    Detalhes
-                  </a>
-                </div>
-              </div>
-              <div class="card-body">
-                <p><img width="45" style="border-radius: 5px;" class="mr-2" src="/media/{{emprego.user.image}}" alt=""> Vaga de {{emprego.type_vacancy|title}} - {{emprego.city}}</p>
-                <p style="font-size: 10.5px; margin-top: -15px;">Postado há {{emprego.created|timesince}}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-
       {% if announcements_city %}
         <div class="row">
           <div class="col-lg-12 col-md-12 col-12">
@@ -135,6 +103,40 @@
           {% endfor %}
         </div>
       {% endif %}
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 style="margin: auto; font-size: 20px;">Vagas que podem ser do seu interesse</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        {% for emprego in announcements %}
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="card">
+              <div class="card-header t">
+                <h4>{{emprego.title}}</h4>
+                <div class="card-header-action">
+                  <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
+                    Detalhes
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <p><img width="45" style="border-radius: 5px;" class="mr-2" src="/media/{{emprego.user.image}}" alt=""> Vaga de {{emprego.type_vacancy|title}} - {{emprego.city}}</p>
+                <p style="font-size: 10.5px; margin-top: -15px;">Postado há {{emprego.created|timesince}}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-12">
