@@ -16,8 +16,20 @@
           </div>
         </div>
     </section>
-    <div class="section-body">
-        
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
+              <input placeholder="Pesquise pela cidade, Tipo de vaga, Empresa, Salários" style="width: 50%;" type="text" name="search" class="form-control mr-3" id="id_search">
+              <button class="btn btn-primary" type="submit">Pesquisar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="section-body">  
 
       <div class="row">
         {% for emprego in all_vacancies %}
