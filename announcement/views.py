@@ -27,8 +27,15 @@ class AnnouncementListView(ListView):
     def get_context_data(self):
         context = super(ListView, self).get_context_data()
         context['citys'] = City.objects.all()
-        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio',active = True).count()
-        context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego',active = True).count()
+        context['tot_announces_emprego'] = 0
+        context['tot_announces_estagio'] = 0
+        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio',active = True)
+        context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego',active = True)
+        for t in context['announces_estagio']:
+            context['tot_announces_estagio'] += t.number_vacancies
+        print('\n\n\n\n', context['tot_announces_estagio'])
+        for t in context['announces_emprego']:
+            context['tot_announces_emprego'] += t.number_vacancies
         context['last_posts'] = Announcement.objects.filter(active = True).order_by('-created')[:8]
         context['tot_users'] = User.objects.all().count()
         context['tot_empresas'] = User.objects.filter(groups__name__in=['Empresa']).count()

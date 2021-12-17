@@ -2981,7 +2981,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0.0; } }
 
-div.card-header > h4{
+div.card-header.t > h4{
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
