@@ -60,7 +60,12 @@
                 {% if request.user != anuncio.user or not request.user.is_authenticated %}
                 <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
                 {% elif request.user == anuncio.user %}
-                <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anuncio</b></a>
+                <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anúncio</b></a>
+                {% endif %}
+                {% if anuncio.active %}
+                    <button class="btn btn-danger btn-lg"><b>Desativar</b></button>
+                {% else %}
+                    <button class="btn btn-success btn-lg"><b>Ativar</b></button>
                 {% endif %}
             </div>
         </div>
