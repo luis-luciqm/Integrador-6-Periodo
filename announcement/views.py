@@ -21,7 +21,7 @@ class AnnouncementListView(ListView):
     context_object_name = 'announcements'
 
     def get_queryset(self):
-        queryset = Announcement.objects.all()[:8]
+        queryset = Announcement.objects.all().order_by('-created')[:6]
         return queryset
     
     def get_context_data(self):
@@ -37,7 +37,7 @@ class AnnouncementListView(ListView):
             if self.request.user.groups.filter(name = 'admin'):
                 context['notifications_solicitation'] = Notification.objects.filter(participate = None, solicitation__accept = False).order_by('-created')
             context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user, created__date = datetime.date.today()).order_by('-created') 
-            context['announcements_city'] = Announcement.objects.filter(active = True, city = self.request.user.city)[:6]    
+            context['announcements_city'] = Announcement.objects.filter(active = True, city = self.request.user.city).order_by('-created')[:6]    
         return context
     
 
