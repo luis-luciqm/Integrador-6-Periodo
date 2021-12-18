@@ -22,12 +22,12 @@
         <div class="card">
           <div class="card-header">
             <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
-              
-              <div id="autocomplete">
-                <input class="autocomplete-input" />
-                <ul class="autocomplete-result-list"></ul>
-              </div>
-              
+              <form id="search-form" action="" method="get">
+                <div id="autocomplete">
+                  <input class="autocomplete-input" type="text" name="search" />
+                  <ul class="autocomplete-result-list"></ul>
+                </div>
+              </form>
           </div>
         </div>
       </div>
@@ -87,7 +87,8 @@
       },
 
       onSubmit : result => {
-        window.open(`/anuncio/todas_as_vagas/?search=${result}`)
+        var searchform = $('#search-form');
+        searchform.submit();
       }
 
     })

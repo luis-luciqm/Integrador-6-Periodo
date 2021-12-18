@@ -111,7 +111,11 @@ class AnnouncementListAllVacanciesViewSet(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data()
-        context['all_vacancies'] = Announcement.objects.filter(active = True).order_by('-created')
+        
+        if self.request.GET.get('search'):
+            context['all_vacancies'] = Announcement.objects.filter(Q(city__name = self.request.GET.get('search')) | Q(type_vacancy =self.request.GET.get('search') ) | Q(title__icontains = self.request.GET.get('search'))).order_by('-created')
+        else:
+            context['all_vacancies'] = Announcement.objects.filter(active = True).order_by('-created')
         return context
 
 class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
@@ -185,8 +189,16 @@ def search_auto_complete(request):
     payload = []
     if value:
         citys = City.objects.filter(name__icontains = value)
-
+        announces = Announcement.objects.filter(title__icontains = value)
+        types = Announcement.objects.filter(type_vacancy__icontains = value)
+        
         for city in citys:
             payload.append(city.name)
+            
+        for annouce in announces:
+            payload.append(annouce.title)
+            
+        for type in types:
+            payload.append(type.type_vacancy)
 
     return JsonResponse({'status': 200, 'data': payload})
