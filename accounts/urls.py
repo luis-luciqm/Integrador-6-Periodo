@@ -25,4 +25,5 @@ urlpatterns = [
     path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao'),
     path('editar_usuario/', update_profile, name='editar_usuario'),
     path('participar_anuncio/<int:pk>/', ParticipateAnnounceFun, name="participar_anuncio"),
+    path('ver_usuario/', Teste.as_view(), name='ver_usuario'),
 ]

@@ -108,5 +108,12 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
             else:
                 messages.error(self.request,"Você já fez uma solicitação de anunciante. Por favor, aguarde a resposta de nossos administradores!")
         return context
+
+class Teste(LoginRequiredMixin, ListView):
+    template_name = 'accounts/view_user.html'
+    model = User
+    queryset = User.objects.all()
+
+
             
 
