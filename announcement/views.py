@@ -108,15 +108,15 @@ class AnnouncementListAllJobsViewSet(ListView):
 class AnnouncementListAllVacanciesViewSet(ListView):
     model = Announcement
     template_name = 'announcement/all_vacancies.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data()
-        
+    paginate_by = 8
+    
+    def get_queryset(self):
+        retorno = None
         if self.request.GET.get('search'):
-            context['all_vacancies'] = Announcement.objects.filter(Q(city__name = self.request.GET.get('search')) | Q(type_vacancy =self.request.GET.get('search') ) | Q(title__icontains = self.request.GET.get('search'))).order_by('-created')
+            retorno = Announcement.objects.filter(Q(city__name = self.request.GET.get('search')) | Q(type_vacancy =self.request.GET.get('search') ) | Q(title__icontains = self.request.GET.get('search'))).order_by('-created')
         else:
-            context['all_vacancies'] = Announcement.objects.filter(active = True).order_by('-created')
-        return context
+            retorno = Announcement.objects.filter(active = True).order_by('-created')
+        return retorno
 
 class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
     model = Announcement
