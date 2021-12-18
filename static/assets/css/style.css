@@ -2994,3 +2994,31 @@ div.card-header.your > h4{
   text-overflow: ellipsis;
   max-width: 60%;
 }
+
+.autocomplete-input{
+  width: 150% !important;
+}
+
+@media only screen and (max-width: 1065px){
+
+  .autocomplete-input{
+    width: 130% !important;
+  }
+
+}
+
+@media only screen and (max-width: 790px){
+
+  .autocomplete-input{
+    width: 100% !important;
+  }
+
+}
+
+@media only screen and (max-width: 500px){
+  .autocomplete-input{
+    width: 100% !important;
+  }
+
+
+}
