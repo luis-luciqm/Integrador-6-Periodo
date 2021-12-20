@@ -124,7 +124,7 @@ class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['phases'] = Announcement.objects.filter(type_vacancy = 'estagio').filter(active = True).order_by('-created')
+        context['phases'] = Announcement.objects.filter(type_vacancy = 'estágio').filter(active = True).order_by('-created')
         return context
 
 class AnnouncementListByCompanyViewSet(ListView):
