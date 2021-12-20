@@ -31,7 +31,7 @@
                 </a>
               </div>
             </div>
-            <div class="card-body">
+            <div class="card-body"> <!---->
               <p><img width="45"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} {{emprego.user.fullname}} {% else %} {{emprego.user.username|title}} {% endif %} - {{emprego.number_vacancies}} Vagas</p>
               <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{estagio.created|timesince}}</p>
             </div>
