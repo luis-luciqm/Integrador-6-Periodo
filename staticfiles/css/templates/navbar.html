@@ -1,0 +1,27 @@
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a class="nav-link scrollto active" href="/">Home</a></li>
+      <li><a class="nav-link scrollto" href="#emprego">Empregos</a></li>
+      <li><a class="nav-link scrollto" href="#estagio">Estágio</a></li>
+      {% if perms.announcement.can_add_announcement %} <!-- so vai aparece para quem tem permissao de adicionar -->
+        <li><a class="nav-link scrollto" href="{% url 'criar_anuncio'%}">Anunciar</a></li>
+      {% else %}
+        <li><a class="nav-link scrollto" href="#">Seja um anunciante</a></li>
+      {% endif %}
+      <li><a class="nav-link scrollto " href="#portfolio">Quem busca</a></li>
+      {% if not request.user.username %}
+      <li><a class="nav-link scrollto" href="/accounts/login">Login</a></li>
+      <li><a class="nav-link scrollto" href="/accounts/register">Criar Conta</a></li>
+      {% else %}
+      <li class="dropdown"><a href="#"><span>{{request.user.username|title}}</span> <i class="bi bi-chevron-down"></i></a>
+        <ul>
+          <li><a href="#">Editar Perfil</a></li>
+          <li><a href="/anuncio/seus_anuncios">Seus Anúncios</a></li>
+          <li><a href="/accounts/change_password">Alterar Senha</a></li>
+          <li><a class="exit" style="color: #ff0000;" href="/accounts/sair">Sair</a></li>
+        </ul>
+      </li>
+      {% endif %}
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->

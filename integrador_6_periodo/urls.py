@@ -24,6 +24,7 @@ from django.contrib.auth import views as auth_views
 from announcement.views import AnnouncementListView
 schema_view = get_swagger_view(title='RN Empregos')
 # from account.views import AccountList
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,5 +37,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
