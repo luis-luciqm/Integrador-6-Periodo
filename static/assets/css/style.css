@@ -2999,9 +2999,17 @@ div.card-header.your > h4{
   width: 150% !important;
 }
 
+ul#autocomplete-result-list-1{
+  width: 150% !important;
+}
+
 @media only screen and (max-width: 1065px){
 
   .autocomplete-input{
+    width: 130% !important;
+  }
+
+  ul#autocomplete-result-list-1{
     width: 130% !important;
   }
 
@@ -3013,10 +3021,18 @@ div.card-header.your > h4{
     width: 100% !important;
   }
 
+  ul#autocomplete-result-list-1{
+    width: 100% !important;
+  }
+
 }
 
 @media only screen and (max-width: 500px){
   .autocomplete-input{
+    width: 100% !important;
+  }
+
+  ul#autocomplete-result-list-1{
     width: 100% !important;
   }
 
