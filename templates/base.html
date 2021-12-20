@@ -134,10 +134,10 @@
             </ul>
 
             <ul class="sidebar-menu">
-              <li class="menu-header">Dashboard</li>
+              <li class="menu-header">Gerenciamento e Vagas</li>
               {% if perms.announcement.add_announcement %}
               <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Dashboard</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Empresa</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   <li><a class="nav-link" href="{% url 'seus_anuncios' %}">Seus Anúncios</a></li>
