@@ -191,6 +191,7 @@ def search_auto_complete(request):
         citys = City.objects.filter(name__icontains = value)
         announces = Announcement.objects.filter(title__icontains = value)
         types = Announcement.objects.filter(type_vacancy__icontains = value)
+        # companys = User.objects.filter(username__icontains = value)
         
         for city in citys:
             payload.append(city.name)
@@ -198,7 +199,10 @@ def search_auto_complete(request):
         for annouce in announces:
             payload.append(annouce.title)
             
-        for type in types:
-            payload.append(type.type_vacancy)
+        for type_v in types:
+            payload.append(type_v.type_vacancy)
+
+        # for company in companys:
+        #     payload.append(company.fullname)
 
     return JsonResponse({'status': 200, 'data': payload})

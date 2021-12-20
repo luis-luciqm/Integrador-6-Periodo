@@ -134,10 +134,10 @@
             </ul>
 
             <ul class="sidebar-menu">
-              <li class="menu-header">Dashboard</li>
+              <li class="menu-header">Gerenciamento e Vagas</li>
               {% if perms.announcement.add_announcement %}
               <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Dashboard</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-newspaper"></i><span>Empresa</span></a>
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   <li><a class="nav-link" href="{% url 'seus_anuncios' %}">Seus Anúncios</a></li>
@@ -181,7 +181,7 @@
       {% endblock content %}
       <!-- Main Content -->
       
-      <div style="margin-left: 16%;" class="simple-footer text-center">
+      <div style="margin-left: 16%; margin-top: 5%;" class="simple-footer text-center">
         <b>Copyright © RN Empregos 2021 - Desenvolvido por: <br> <img style="width: 180px;" src="{% static 'img/simbol_if2.png' %}" alt=""></b>
       </div>
     </div>
