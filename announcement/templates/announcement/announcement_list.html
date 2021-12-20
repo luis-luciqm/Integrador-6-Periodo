@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <p><img width="45" style="border-radius: 5px;" class="mr-2" {% if emprego.user.image %} src="/media/{{emprego.user.image}}" {% else %} src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> Vaga de {{emprego.type_vacancy|title}} - {{emprego.city}}</p>
+                <p><img width="45" style="border-radius: 5px;" class="mr-2" {% if emprego.user.image %} src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> Vaga de {{emprego.type_vacancy|title}} - {{emprego.city}}</p>
                 <p style="font-size: 10.5px; margin-top: -15px;">Postado há {{emprego.created|timesince}}</p>
               </div>
             </div>
