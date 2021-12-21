@@ -33,7 +33,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <p><img width="45"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if user_company.fullname %} {{user_company.fullname|title}} {% else %} {{user_company.username|title}} {% endif %} - {{emprego.number_vacancies}} Vagas</p>
+                <p><img width="45"  class="mr-2" {% if anuncio.user.image %} style="border-radius: 5px;" src="/media/{{anuncio.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if user_company.fullname %} {{user_company.fullname|title}} {% else %} {{user_company.username|title}} {% endif %} - {{anuncio.number_vacancies}} Vagas</p>
                 <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{anuncio.created|timesince}}</p>
               </div>
             </div>
