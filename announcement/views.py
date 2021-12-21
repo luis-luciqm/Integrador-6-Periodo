@@ -30,7 +30,7 @@ class AnnouncementListView(ListView):
         context['citys'] = City.objects.all()
         context['tot_announces_emprego'] = 0
         context['tot_announces_estagio'] = 0
-        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estagio',active = True)
+        context['announces_estagio'] = Announcement.objects.filter(type_vacancy = 'estágio',active = True)
         context['announces_emprego'] = Announcement.objects.filter(type_vacancy = 'emprego',active = True)
         for t in context['announces_estagio']:
             context['tot_announces_estagio'] += t.number_vacancies
