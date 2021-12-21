@@ -170,7 +170,7 @@
                           <a style="color: rgb(31, 31, 31)" href="{% url 'listagem_pela_empresa' post.user.id %}">{{post.user.username|title}}</a>
                         </td>
                         <td style="color: rgb(31, 31, 31)">
-                          {% if post.type_vacancy == 'estagio' %}
+                          {% if post.type_vacancy == 'estágio' %}
                             <a style="color: rgb(31, 31, 31)" href="{% url 'vagas_estagio' %}">{{post.type_vacancy|title}}</a>
                           {% else %}
                             <a style="color: rgb(31, 31, 31)" href="{% url 'vagas_empregos' %}">{{post.type_vacancy|title}}</a>
