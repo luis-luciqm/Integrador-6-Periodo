@@ -27,7 +27,7 @@ jobs:
         python-version: 3.9.6
     - name: conectando ssh
       run: |
-        ssh root@31.220.48.246
+        ssh -t root@31.220.48.246
     - name: Instalando dependencias
       run: |
         source venv/bin/activate
