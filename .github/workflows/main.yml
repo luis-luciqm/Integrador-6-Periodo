@@ -27,7 +27,6 @@ jobs:
       with:
         python-version: 3.9.6
     - name: executing remote ssh commands using password
-      uses: ./
       with:
         host: 31.220.48.246
         username: root
