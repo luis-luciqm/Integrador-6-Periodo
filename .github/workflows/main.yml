@@ -1,32 +1,18 @@
 name: Django Integracao Continua
 
-on: 
-  push: 
-    branches:
-      - main
+on: [push]
 
 jobs: 
   build:
+    name: BUILD
     runs-on: ubuntu-latest
 
     steps:
     - name: checkout
       uses: actions/checkout@v1
     
-    #- name: Install SSH Key
-    #   uses: shimataro/ssh-key-action@v2
-    #   with:
-    #     key: ${{ secrets.ssh_key }} 
-    #     known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-
-    # - name: Adding Known Hosts
-    #   run: ssh-keyscan -H ${{ secrets.ssh_host }} >> /root/known_hosts
-
-    - name: Verificando versao do python 3.9.6
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9.6
     - name: executing remote ssh commands using password
+      uses: ./
       with:
         host: 31.220.48.246
         username: root
