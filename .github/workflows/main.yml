@@ -3,13 +3,15 @@ name: Django Integracao Continua
 on: [push]
 
 jobs: 
-  build:
-    name: BUILD
+  first-job:
+    name: First-Job
     runs-on: ubuntu-latest
 
     steps:
     - name: checkout
       uses: actions/checkout@v1
+    - name: action
+      user: ./.github/actions/main
     
     - name: executing remote ssh commands using password
       uses: ./
