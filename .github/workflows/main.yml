@@ -6,8 +6,7 @@ on:
       -main
 
 jobs: 
-  web-deploy:
-    name: Deploy
+  build:
     runs-on: ubuntu-latest
 
     steps:
