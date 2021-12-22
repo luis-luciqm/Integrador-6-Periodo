@@ -1,0 +1,38 @@
+name: Django Integracao Continua
+
+on: 
+  push: 
+    branches:
+      -main
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+
+    step:
+    - uses: actions/checkout@v2
+    
+    - name: Conectando no SSH
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.1
+      with:
+        username: root
+        server : 31.220.48.246
+        port: 22
+        ssh_private_key: Jefersonqueiroga123#
+
+    - name: Verificando versao do python 3.9.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.6
+    - name: Instalando dependencias
+      run: |
+        source venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Fazendo migrate
+      run: |
+        python3 manage.py migrate
+    - name: Rodando server de novo
+      run: |
+        sudo systemctl restart gunicorn
+        sudo systemctl restart nginx
