@@ -160,6 +160,7 @@ class AnnouncementEnableView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         anuncio = Announcement.objects.get(slug = self.kwargs['slug'])
         anuncio.active = True
+        anuncio.created = datetime.datetime.today()
         anuncio.save()
         return anuncio
     
