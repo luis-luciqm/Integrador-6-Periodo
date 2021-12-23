@@ -36,10 +36,9 @@ jobs:
         port: 22
         script: whoami
 
-    - name: Criar venv
+    - name: Actions
       run: |
         git branch -M master
         git pull
-        sudo systemctl restart nginx
-    - name: Listar pastas
-      run: ls
+        sudo systemctl restart gunicorn
+        ls
