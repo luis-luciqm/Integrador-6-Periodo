@@ -37,9 +37,4 @@ jobs:
         script: whoami
 
     - name: atualizando branches
-      run: |
-        source venv/bin/activate
-        git pull
-        python3 manage.py migrate
-        sudo systemctl restart gunicorn
-        sudo systemctl restart nginx
+      run: source venv/bin/activate
