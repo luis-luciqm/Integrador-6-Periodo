@@ -16,6 +16,7 @@ from django.urls.base import reverse_lazy
 import datetime
 from django.http import JsonResponse
 # Create your views here.
+from django.views import View
 class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'list_announcement.html'
@@ -207,3 +208,9 @@ def search_auto_complete(request):
         #     payload.append(company.fullname)
 
     return JsonResponse({'status': 200, 'data': payload})
+
+class AboutUs(View):
+    template_name = 'announcement/about-us.html'
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {})
