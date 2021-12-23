@@ -37,4 +37,4 @@ jobs:
         script: whoami
 
     - name: atualizando branches
-      run: cd Site/Integrador-6-Periodo/
+      run: cd /root/Site/Integrador-6-Periodo
