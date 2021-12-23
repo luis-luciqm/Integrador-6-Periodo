@@ -36,5 +36,8 @@ jobs:
         port: 22
         script: whoami
 
-    - name: atualizando branches
+    - name: Criar venv
+      run: virtualenv venv
+    
+    - name: Listar pastas
       run: ls
