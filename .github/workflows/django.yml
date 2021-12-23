@@ -36,9 +36,7 @@ jobs:
         port: 22
         script: whoami
 
-    - name: Actions
-      run: |
-        git branch -M master
-        git pull
-        sudo systemctl restart gunicorn
-        ls
+    - run: git branch -M master
+    - run: git pull
+    - run: python3 manage.py migrate
+    - run: sudo systemctl restart gunicorn
