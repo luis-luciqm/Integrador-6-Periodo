@@ -37,4 +37,4 @@ jobs:
         script: whoami
 
     - name: atualizando branches
-      run: source venv/bin/activate
+      run: cd Site/Integrador-6-Periodo/
