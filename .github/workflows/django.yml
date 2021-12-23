@@ -38,6 +38,7 @@ jobs:
 
     - name: Criar venv
       run: |
+        git branch -M master
         git pull
         sudo systemctl restart gunicorn
         sudo systemctl restart nginx
