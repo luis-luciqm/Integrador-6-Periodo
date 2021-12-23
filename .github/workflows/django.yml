@@ -26,3 +26,12 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+
+    - name: executing remote ssh commands using password
+      uses: ./
+      with:
+        host: 31.220.48.246
+        username: root
+        password: Jefersonqueiroga123#
+        port: 22
+        script: whoami
