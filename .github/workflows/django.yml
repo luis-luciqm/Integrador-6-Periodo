@@ -37,4 +37,4 @@ jobs:
         script: whoami
 
     - name: atualizando branches
-      run: nano requirements.txt
+      run: ls
