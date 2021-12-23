@@ -35,3 +35,11 @@ jobs:
         password: Jefersonqueiroga123#
         port: 22
         script: whoami
+
+    - name: atualizando branches
+      run: |
+        source venv/bin/activate
+        git pull
+        python3 manage.py migrate
+        sudo systemctl restart gunicorn
+        sudo systemctl restart nginx
