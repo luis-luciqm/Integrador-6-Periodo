@@ -40,8 +40,6 @@ jobs:
       run: |
         git branch -M master
         git pull
-        sudo systemctl start gunicorn
-        sudo systemctl enable gunicorn
         sudo systemctl restart nginx
     - name: Listar pastas
       run: ls
