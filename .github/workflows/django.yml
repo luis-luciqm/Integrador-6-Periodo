@@ -12,9 +12,9 @@ jobs:
       - name: deploying changes
         uses: appleboy/ssh-action@master
         with:
-          host: 31.220.48.246
-          username: root
-          password: Jefersonqueiroga123#
+          host: ${{secrets.HOST}}}
+          username: ${{secrets.USERNAME}}
+          password: ${{secrets.PASSWORD}}
           port: 22
           envs: DJANGO_SECRET_KEY
           script: |
