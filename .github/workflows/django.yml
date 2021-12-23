@@ -18,11 +18,12 @@ jobs:
           port: 22
           envs: DJANGO_SECRET_KEY
           script: |
+            cd Site/Integrador-6-Periodo
             git pull
             python3 manage.py migrate
             systemctl restart gunicorn
             systemctl restart nginx
-            ls
+            
 
 
 
