@@ -37,7 +37,9 @@ jobs:
         script: whoami
 
     - name: Criar venv
-      run: virtualenv venv
-    
+      run: |
+        git pull
+        sudo systemctl restart gunicorn
+        sudo systemctl restart nginx
     - name: Listar pastas
       run: ls
