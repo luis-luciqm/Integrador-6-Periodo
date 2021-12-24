@@ -59,9 +59,6 @@ class AnnouncementDatailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['anuncio'] = Announcement.objects.get(slug = self.kwargs['slug'])
-        if self.request.user == context['anuncio'].user:
-            context['participates'] = ParticipateAnnounce.objects.filter(announcement = context['anuncio'])
-            context['qtd_participates'] = ParticipateAnnounce.objects.filter(announcement = context['anuncio']).count()
         return context
 
 
@@ -219,3 +216,13 @@ class AboutUs(View):
     
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {})
+    
+class ParticipateAnnounceList(LoginRequiredMixin, ListView):
+    model = ParticipateAnnounce
+    template_name = 'announcement/candidatos-anounce.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['participates'] = ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug'])
+        context['qtd_participates'] = ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug']).count()
+        return context

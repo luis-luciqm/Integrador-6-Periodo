@@ -23,6 +23,7 @@
           <tr>
             <th>Solicitante</th>
             <th>Descrição</th>
+            <th>CNPJ</th>
             <th>Hora</th>
             <th>Ação</th>
           </tr>
@@ -36,12 +37,16 @@
                 <td>
                   {{ solicitation.description }}
                 </td>
+                <td> 
+                <a target="_blank" href="https://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj={{ solicitation.cnpj }}">{{ solicitation.cnpj }}</a>
+                
+                </td>
                 <td>
                   <i class="fas fa-stopwatch"></i> há {{solicitation.created | timesince}}
                 </td>
                 <td>
                     <a class="btn btn-success" href="{% url 'aprovar_solicitacao' solicitation.id %}">Aceitar</a>
-                    <a class="btn btn-danger" href="{% url 'aprovar_solicitacao' solicitation.id %}">Recusar</a>
+                    <a class="btn btn-danger" href="{% url 'recusar_solicitacao' solicitation.id %}">Recusar</a>
                 </td>    
             </tr>
             {% endfor %}

@@ -21,6 +21,12 @@ def ApproveSolicitation(request, pk):
     
     return redirect('/accounts/listar_solicitacoes/')
 
+def RecuseSolicitation(request, pk):
+    solicitation = Solicitation.objects.get(pk=pk)
+    solicitation.delete()
+    
+    return redirect('/accounts/listar_solicitacoes/')
+
 def update_profile(request):
     if request.user.is_authenticated:
         args = {}

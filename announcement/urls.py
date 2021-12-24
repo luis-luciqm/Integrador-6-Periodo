@@ -12,6 +12,7 @@ urlpatterns = [
     path('desativar_anuncio/<slug:slug>/', AnnouncementDisableView.as_view(), name="desativar_anuncio"),
     path('todas_as_vagas/', AnnouncementListAllVacanciesViewSet.as_view(), name="todas_as_vagas"),
     path('search/', search_auto_complete),
+    path('candidatos/<slug:slug>/',ParticipateAnnounceList.as_view(), name="candidatos"),
 
     
 ]

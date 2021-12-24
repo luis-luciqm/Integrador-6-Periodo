@@ -29,7 +29,9 @@ class SolicitationForm(forms.ModelForm):
     description = forms.CharField()
     class Meta:
         model = Solicitation
-        fields = ['description']
+        fields = ['description', 'cnpj']
+
+    
         
         
 class UserForm2(forms.ModelForm):
