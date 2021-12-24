@@ -18,7 +18,7 @@
     </div>
   
     <table class="table table-striped mb-0">
-        {% if solicitations %}
+        {% if page_obj %}
         <thead>
           <tr>
             <th>Solicitante</th>
@@ -29,22 +29,22 @@
           </tr>
         </thead>
         <tbody>
-            {% for solicitation in solicitations %}
+            {% for solicitation in page_obj %}
             <tr>
-                <td>
-                  {% if solicitation.user.image %} <img src="/media/{{solicitation.user.image}}" style="border-radius: 5px;" width="45" class="mr-1" alt=""> {% else %} <img alt="image" style="border-radius: 50%; margin-left: -2px;" width="50" class="mr-1" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1"> {% endif %} <a href="{% url 'ver_usuario' solicitation.user.username %}"> {% if solicitation.user.fullname %} {{solicitation.user.fullname|title}} {% else %} {{solicitation.user.username|title}} {% endif %}</a>
+                <td style="width:200px;">
+                  {% if solicitation.user.image %} <img src="/media/{{solicitation.user.image}}" style="border-radius: 5px;" width="45" class="mr-1" alt=""> {% else %} <img alt="image" style="border-radius: 50%; margin-left: -2px;" width="50" class="mr-1" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1"> {% endif %} <a href="{% url 'ver_usuario' solicitation.user.username %}"> {{solicitation.user.username|title}}</a>
                 </td>
                 <td>
-                  {{ solicitation.description }}
+                  <p style="max-width: 100% !important;" 
+                  id="id_solicitation_description">{{ solicitation.description }}</p>
                 </td>
-                <td> 
-                <a target="_blank" href="https://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj={{ solicitation.cnpj }}">{{ solicitation.cnpj }}</a>
-                
+                <td style="width:200px;"> 
+                  <a target="_blank" href="https://servicos.receita.fazenda.gov.br/Servicos/cnpjreva/Cnpjreva_Solicitacao.asp?cnpj={{ solicitation.cnpj }}">{{ solicitation.cnpj }}</a>
                 </td>
-                <td>
+                <td style="width:200px;">
                   <i class="fas fa-stopwatch"></i> há {{solicitation.created | timesince}}
                 </td>
-                <td>
+                <td style="width:200px;">
                     <a class="btn btn-success" href="{% url 'aprovar_solicitacao' solicitation.id %}">Aceitar</a>
                     <a class="btn btn-danger" href="{% url 'recusar_solicitacao' solicitation.id %}">Recusar</a>
                 </td>    
@@ -64,6 +64,42 @@
           {% endif %}
         </tbody>
     </table>
+    <br>
+    <nav class="float-right">
+      <ul class="pagination">
+        <li class="page-item">
+          {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1">&laquo; Primeiro</a>
+          {% endif %}
+        </li>
+
+        <li class="page-item">
+          {% if page_obj.has_previous %}
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+          {% endif %}
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">de</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        </li>
+        <li class="page-item">
+          {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+            
+          {% endif %}
+        </li>
+        <li class="page-item">
+          {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+          {% endif %}
+        </li>
+      </ul>
+    </nav>
   </section>
 </div>
 

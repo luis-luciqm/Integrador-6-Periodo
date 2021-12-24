@@ -85,9 +85,9 @@ class PasswordResetCompleteView(SuccessMessageMixin, PasswordResetCompleteView):
 class ListSolicitationView(PermissionRequiredMixin,LoginRequiredMixin, ListView):
     model = Solicitation
     queryset = Solicitation.objects.filter(accept = False)
-    context_object_name = 'solicitations'
     template_name = 'accounts/list-solicitation.html' 
     permission_required = ('accounts.view_solicitation')
+    paginate_by = 15
     
 class UserBusinessView(LoginRequiredMixin,CreateView):
     template_name= 'accounts/solicitation-business.html'
