@@ -220,9 +220,12 @@ class AboutUs(View):
 class ParticipateAnnounceList(LoginRequiredMixin, ListView):
     model = ParticipateAnnounce
     template_name = 'announcement/candidatos-anounce.html'
+    paginate_by = 15
+    
+    def get_queryset(self):
+        return ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug'])
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['participates'] = ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug'])
         context['qtd_participates'] = ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug']).count()
         return context
