@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.views import LoginView,PasswordResetView
+from django.http.response import Http404
 from django.shortcuts import redirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView
@@ -11,6 +12,7 @@ from django.contrib.auth.views import LoginView, PasswordResetView, PasswordRese
     PasswordResetCompleteView, PasswordChangeView
 from .models import *
 from authentication.models import User
+from django.views.generic.detail import DetailView
 
 
 class UserLogin(LoginView):
@@ -109,10 +111,22 @@ class UserBusinessView(LoginRequiredMixin,CreateView):
                 messages.error(self.request,"Você já fez uma solicitação de anunciante. Por favor, aguarde a resposta de nossos administradores!")
         return context
 
-class Teste(LoginRequiredMixin, ListView):
+    
+class UserDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/view_user.html'
-    model = User
     queryset = User.objects.all()
+    
+    def get_object(self, *args, **kwargs):
+        username = self.kwargs.get('username')
+        
+        try:
+            instance = User.objects.get(username = username)
+        except User.DoesNotExist:
+            raise Http404("Não encontrado!")
+        except User.MultipleObjectsReturned:
+            qs = User.objects.filter(username = username)
+            instance =  qs.first()
+        return instance
 
 
             
