@@ -6,7 +6,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Venha ser um Anunciante!!!</h1>
+                <h1>Venha ser um Anunciante!</h1>
             </div>
 
             <div class="card card-primary">
@@ -32,7 +32,10 @@
     </div>
 
     <script>
-        document.querySelector('#id_description').classList.add('form-control')
+        window.onload = function(){
+            document.querySelector('#id_description').classList.add('form-control')
+            document.querySelector('#id_cnpj').classList.add('form-control')
+        }
     </script>
     
 {% endblock content %} 

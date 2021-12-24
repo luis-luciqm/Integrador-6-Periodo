@@ -23,6 +23,8 @@ urlpatterns = [
     path('seja_anunciante/',  UserBusinessView.as_view(), name='seja_anunciante'),
     path('listar_solicitacoes/', ListSolicitationView.as_view(), name= 'listar_solicitacoes'),
     path('aprovar_solicitacao/<int:pk>/', ApproveSolicitation, name= 'aprovar_solicitacao'),
+    path('recusar_solicitacao/<int:pk>/', RecuseSolicitation, name= 'recusar_solicitacao'),
+    
     path('editar_usuario/', update_profile, name='editar_usuario'),
     path('participar_anuncio/<int:pk>/', ParticipateAnnounceFun, name="participar_anuncio"),
     path('ver_usuario/<str:username>/', UserDetailsView.as_view(), name='ver_usuario'),

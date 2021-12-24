@@ -9,6 +9,7 @@ class Solicitation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_solicitation")
     created = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
+    cnpj = models.CharField(max_length=50, null=True)
     accept = models.BooleanField(default=False)
     
     class Meta:
