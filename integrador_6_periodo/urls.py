@@ -21,19 +21,20 @@ from django.conf.urls.static import static
 from rest_framework_swagger.views import get_swagger_view
 from django.contrib.auth import views as auth_views
 
-from announcement.views import AnnouncementListView
+from announcement.views import AnnouncementListView, AboutUs
 schema_view = get_swagger_view(title='RN Empregos')
 # from account.views import AccountList
 from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/autenticacao/', include('authentication.urls')),
+    path('sobre/', AboutUs.as_view(), name='sobre'),
     path('anuncio/', include('announcement.urls')),
     path('', AnnouncementListView.as_view(), name="listar_anuncios"),
-    path('api/', schema_view, name='schema-swagger-ui'),
-    path('api/anuncio/', include('announcement.api.urls')),
-    path('api/accounts/', include('accounts.api.urls')),
+    # path('api/', schema_view, name='schema-swagger-ui'),
+    # path('api/anuncio/', include('announcement.api.urls')),
+    # path('api/accounts/', include('accounts.api.urls')),
+    # path('api/autenticacao/', include('authentication.urls')),
     path('accounts/', include('accounts.urls')),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),

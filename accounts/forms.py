@@ -22,6 +22,7 @@ class UserForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['city'].widget.attrs['class'] = 'form-control'
+        #self.fileds['phone'].widget.attrs['class'] = 'form-control'
         
         
 class SolicitationForm(forms.ModelForm):
@@ -33,6 +34,7 @@ class SolicitationForm(forms.ModelForm):
         
 class UserForm2(forms.ModelForm):
     email = forms.EmailField()
+    phone = forms.CharField()
     username = forms.CharField()
     fullname = forms.CharField()
     city = forms.ModelChoiceField(queryset=City.objects.all(), required=False)
@@ -41,6 +43,6 @@ class UserForm2(forms.ModelForm):
     
     class Meta:
         model = User
-        fields = ['email', 'username','fullname', 'city', 'image', 'curriculum']
+        fields = ['email', 'username','fullname','phone', 'city', 'image', 'curriculum']
         
 # class PasswordResetForm():

@@ -31,7 +31,7 @@
             {% for solicitation in solicitations %}
             <tr>
                 <td>
-                  {% if solicitation.user.image %} <img src="/media/{{solicitation.user.image}}" style="border-radius: 5px;" width="45" class="mr-1" alt=""> {% else %} <img alt="image" style="border-radius: 50%; margin-left: -2px;" width="50" class="mr-1" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1"> {% endif %} {% if solicitation.user.fullname %} {{solicitation.user.fullname|title}} {% else %} {{solicitation.user.username|title}} {% endif %}
+                  {% if solicitation.user.image %} <img src="/media/{{solicitation.user.image}}" style="border-radius: 5px;" width="45" class="mr-1" alt=""> {% else %} <img alt="image" style="border-radius: 50%; margin-left: -2px;" width="50" class="mr-1" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1"> {% endif %} <a href="{% url 'ver_usuario' solicitation.user.username %}"> {% if solicitation.user.fullname %} {{solicitation.user.fullname|title}} {% else %} {{solicitation.user.username|title}} {% endif %}</a>
                 </td>
                 <td>
                   {{ solicitation.description }}

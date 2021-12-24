@@ -164,7 +164,7 @@ ROLEPERMISSIONS_MODULE = 'integrador_6_periodo.roles'
 
 #login and logout
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'sair'
 
