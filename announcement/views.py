@@ -44,8 +44,8 @@ class AnnouncementListView(ListView):
         
         if self.request.user.username: #necessita do usuario está logado
             if self.request.user.groups.filter(name = 'admin'):
-                context['notifications_solicitation'] = Notification.objects.filter(participate = None, solicitation__accept = False).order_by('-created')
-            context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user, created__date = datetime.date.today()).order_by('-created') 
+                context['notifications_solicitation'] = Notification.objects.filter(participate = None, solicitation__accept = False).order_by('-created')[:4]
+            context['notifications_partipate'] = Notification.objects.filter(solicitation = None, participate__announcement__user = self.request.user, created__date = datetime.date.today()).order_by('-created')[:4]
             context['announcements_city'] = Announcement.objects.filter(active = True, city = self.request.user.city).order_by('-created')[:6]    
         return context
     
@@ -59,6 +59,9 @@ class AnnouncementDatailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['anuncio'] = Announcement.objects.get(slug = self.kwargs['slug'])
+        if self.request.user == context['anuncio'].user:
+            context['participates'] = ParticipateAnnounce.objects.filter(announcement = context['anuncio'])
+            context['qtd_participates'] = ParticipateAnnounce.objects.filter(announcement = context['anuncio']).count()
         return context
 
 
@@ -145,6 +148,8 @@ def ParticipateAnnounceFun(request, pk):
             if not anounce.user == request.user:
                 p = ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
                 messages.success(request, "Você agora está concorrendo a vaga. Boa sorte!!")
+                if not request.user.curriculum:
+                    messages.warning(request, "Para maiores chances de conseguir uma vaga, vá até a seção de editar perfil e anexe seu currículo.")
                 Notification.objects.create(participate=p, text=f'Uma nova pessoa se candidatou para o anuncio: {anounce.title}')
             else:
                 messages.error(request, "Você não pode se candidatar há uma vaga que você mesmo criou.")

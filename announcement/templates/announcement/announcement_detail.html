@@ -18,7 +18,7 @@
     {% if messages %}
         <ul style="margin-left: -40px;" class="messages">
             {% for message in messages %}
-            <li style="text-align: center;" {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}><b>{{ message }}</b></li>
+            <li style="text-align: center;" {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %} {% if message.tags == 'warning' %} class="alert alert-warning"{% endif %}><b>{{ message }}</b></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -70,6 +70,48 @@
             </div>
         </div>
 
+        {% if request.user.username and request.user == anuncio.user %}
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Candidatos</h4>
+                    <div class="card-header-action">
+                      <span href="#" class="badge badge-primary">{{qtd_participates}}</span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>Candidato</th>
+                            <th>Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for post in participates %}
+                          <tr>
+                              <td style="color: rgb(31, 31, 31)">
+                                {% if post.user.image %}
+                                  <img style="border-radius: 7px;" src="/media/{{post.user.image}}" width="50" class="mr-3" alt="avatar">
+                                {% else %}
+                                  <img style="border-radius: 7px;" alt="image" width="45" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-4">
+                                {% endif %}
+                                <span style="color: rgb(31, 31, 31)">{{post.user.fullname|title}}</span>
+                              </td>
+
+                              <td><a class="btn btn-primary" href="{% url 'ver_usuario' post.user.username %}">Ver mais</a></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif%}
 
     </section>
 </div>

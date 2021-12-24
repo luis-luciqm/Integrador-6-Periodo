@@ -22,7 +22,7 @@ class UserForm(UserCreationForm):
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
         self.fields['city'].widget.attrs['class'] = 'form-control'
-        #self.fileds['phone'].widget.attrs['class'] = 'form-control'
+        
         
         
 class SolicitationForm(forms.ModelForm):
@@ -45,4 +45,7 @@ class UserForm2(forms.ModelForm):
         model = User
         fields = ['email', 'username','fullname','phone', 'city', 'image', 'curriculum']
         
+    def __init__(self, *args, **kwargs):
+        super(UserForm2, self).__init__(*args, **kwargs)
+        self.fields['phone'].widget.attrs['class'] = 'form-control'
 # class PasswordResetForm():
