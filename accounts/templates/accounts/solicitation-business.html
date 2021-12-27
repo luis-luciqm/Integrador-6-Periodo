@@ -6,6 +6,9 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
+            <div class="section-header-back">
+                <a href="/" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            </div>
                 <h1>Venha ser um Anunciante!</h1>
             </div>
 
@@ -23,7 +26,7 @@
                         {% csrf_token %}
                         {{ form.as_p}}
 
-                        <input class="btn btn-primary" type="submit" value="Mandar">
+                        <input class="btn btn-primary" type="submit" value="Solicitar">
                     </form>
                     {% endif %}
                 </div>
@@ -35,6 +38,10 @@
         window.onload = function(){
             document.querySelector('#id_description').classList.add('form-control')
             document.querySelector('#id_cnpj').classList.add('form-control')
+            let labels = document.querySelectorAll('label')
+            labels[0].textContent = 'Descrição'
+            labels[1].textContent = 'CNPJ'
+
         }
     </script>
     
