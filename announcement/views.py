@@ -79,7 +79,7 @@ class AnnouncementUpdateView(PermissionRequiredMixin,LoginRequiredMixin,UpdateVi
     model = Announcement
     form_class = AnnouncementForm
     template_name = 'announcement/form-create-anuncio.html'
-    permission_required = ('announcement.change_announcement')
+    permission_required = ('announcement.add_announcement')
     queryset = Announcement.objects.all()
     lookup_field = 'slug'
     
@@ -103,13 +103,16 @@ class AnnouncementListAllJobsViewSet(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data()
-        context['jobs'] = Announcement.objects.filter(type_vacancy = 'emprego').filter(active = True).order_by('-created')
+        if not self.request.GET.get('search'):
+            context['jobs'] = Announcement.objects.filter(type_vacancy = 'emprego').filter(active = True).order_by('-created')
+        else:
+            context['jobs'] = Announcement.objects.filter(type_vacancy = 'emprego',active = True, title__icontains = self.request.GET.get('search')).order_by('-created')
         return context
 
 class AnnouncementListAllVacanciesViewSet(ListView):
     model = Announcement
     template_name = 'announcement/all_vacancies.html'
-    paginate_by = 8
+    paginate_by = 16
     
     def get_queryset(self):
         retorno = None
@@ -118,6 +121,12 @@ class AnnouncementListAllVacanciesViewSet(ListView):
         else:
             retorno = Announcement.objects.filter(active = True).order_by('-created')
         return retorno
+    
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        if self.request.GET.get('search'):
+            context['definerouter'] = self.request.GET.get('search')
+        return context
 
 class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
     model = Announcement
@@ -125,7 +134,10 @@ class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        context['phases'] = Announcement.objects.filter(type_vacancy = 'estágio').filter(active = True).order_by('-created')
+        if not self.request.GET.get('search'):
+            context['phases'] = Announcement.objects.filter(type_vacancy = 'estágio').filter(active = True).order_by('-created')
+        else:
+            context['phases'] = Announcement.objects.filter(type_vacancy = 'estágio',active = True,title__icontains = self.request.GET.get('search')).order_by('-created')
         return context
 
 class AnnouncementListByCompanyViewSet(ListView):
@@ -134,7 +146,11 @@ class AnnouncementListByCompanyViewSet(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).order_by('-created')
+        if not self.request.GET.get('search'):
+            context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).order_by('-created')
+        else:
+            value = self.request.GET.get('search')
+            context['anuncios_company'] = Announcement.objects.filter(user = self.kwargs['id']).filter(Q(type_vacancy__icontains = value)|Q(title__icontains= value)|Q(city__name__icontains = value)).order_by('-created')
         context['user_company'] = User.objects.get(id = self.kwargs['id'])
         return context
     
@@ -190,6 +206,68 @@ class AnnouncementDisableView(LoginRequiredMixin, ListView):
 
 def search_auto_complete(request):
     value = request.GET.get('city')
+    payload = []
+    if value:
+        citys = City.objects.filter(name__icontains = value)
+        announces = Announcement.objects.filter(title__icontains = value)
+        types = Announcement.objects.filter(type_vacancy__icontains = value)
+        # companys = User.objects.filter(username__icontains = value)
+        
+        for city in citys:
+            payload.append(city.name)
+            
+        for annouce in announces:
+            payload.append(annouce.title)
+            
+        for type_v in types:
+            payload.append(type_v.type_vacancy)
+
+        # for company in companys:
+        #     payload.append(company.fullname)
+
+    return JsonResponse({'status': 200, 'data': payload})
+
+def search_auto_complete_phases(request):
+    value = request.GET.get('search')
+    payload = []
+    if value:
+        citys = City.objects.filter(name__icontains = value)
+        announces = Announcement.objects.filter(title__icontains = value, type_vacancy__icontains='estágio')
+        # companys = User.objects.filter(username__icontains = value)
+        
+        for city in citys:
+            payload.append(city.name)
+            
+        for annouce in announces:
+            payload.append(annouce.title)
+
+        # for company in companys:
+        #     payload.append(company.fullname)
+
+    return JsonResponse({'status': 200, 'data': payload})
+
+
+def search_auto_complete_jobs(request):
+    value = request.GET.get('search')
+    payload = []
+    if value:
+        citys = City.objects.filter(name__icontains = value)
+        announces = Announcement.objects.filter(title__icontains = value, type_vacancy__icontains='emprego')
+        # companys = User.objects.filter(username__icontains = value)
+        
+        for city in citys:
+            payload.append(city.name)
+            
+        for annouce in announces:
+            payload.append(annouce.title)
+
+        # for company in companys:
+        #     payload.append(company.fullname)
+
+    return JsonResponse({'status': 200, 'data': payload})
+
+def search_auto_complete_company(request):
+    value = request.GET.get('search')
     payload = []
     if value:
         citys = City.objects.filter(name__icontains = value)

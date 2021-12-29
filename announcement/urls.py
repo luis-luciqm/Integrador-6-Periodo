@@ -10,8 +10,11 @@ urlpatterns = [
     path('listagem_pela_empresa/<int:id>/', AnnouncementListByCompanyViewSet.as_view(), name='listagem_pela_empresa'),
     path('ativar_anuncio/<slug:slug>/', AnnouncementEnableView.as_view(), name='ativar_anuncio'),
     path('desativar_anuncio/<slug:slug>/', AnnouncementDisableView.as_view(), name="desativar_anuncio"),
-    path('todas_as_vagas/', AnnouncementListAllVacanciesViewSet.as_view(), name="todas_as_vagas"),
+    #path('todas_as_vagas/', AnnouncementListAllVacanciesViewSet.as_view(), name="todas_as_vagas"),
     path('search/', search_auto_complete),
+    path('search_phases/', search_auto_complete_phases),
+    path('search_jobs/', search_auto_complete_jobs),
+    path('search_company/', search_auto_complete_company),
     path('candidatos/<slug:slug>/',ParticipateAnnounceList.as_view(), name="candidatos"),
 
     

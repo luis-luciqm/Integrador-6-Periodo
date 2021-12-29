@@ -16,78 +16,106 @@
           </div>
         </div>
     </section>
-
-    <div class="row">
-      <div class="col-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
-              <form id="search-form" action="" method="get">
-                <div id="autocomplete">
-                  <input class="autocomplete-input" type="text" name="search" />
-                  <ul class="autocomplete-result-list"></ul>
-                </div>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
   
     <div class="section-body">  
+      <div class="container">
 
-      <div class="row">
-        {% for emprego in page_obj %}
-
-        <div class="col-12 col-md-6 col-lg-6">
-          <div class="card">
-            <div class="card-header t">
-              <h4>{{emprego.title}}</h4>
-              <div class="card-header-action">
-                <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
-                  Detalhes
-                </a>
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
+                  <form id="search-form" action="" method="get">
+                    <div id="autocomplete">
+                      <input class="autocomplete-input" type="text" name="search" />
+                      <ul class="autocomplete-result-list"></ul>
+                    </div>
+                  </form>
               </div>
-            </div>
-            <div class="card-body">
-              <p><img width="45"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} {{emprego.user.fullname}} {% else %} {{emprego.user.username|title}} {% endif %} - {{emprego.number_vacancies}} Vagas</p>
-              <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{emprego.created|timesince}}</p>
             </div>
           </div>
         </div>
-        {% endfor %}        
+
+        <div class="row">
+          {% for emprego in page_obj %}
+
+          <div class="col-12 col-md-8 col-lg-6">
+            <div class="card">
+              <div class="card-header t">
+                <h4>{{emprego.title}} <br>  <p style="color: green;"> {{emprego.number_vacancies}} vagas</p> </h4>
+                <div class="card-header-action">
+                  <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
+                    Detalhes
+                  </a>
+                </div>
+              </div>
+              <div style="padding-top:0px !important;" class="card-body">
+                <p>Vaga de {{emprego.type_vacancy|title}}</p>
+                <p style="margin-top: -10px;">{{emprego.city|title}}</p>
+                <p><img width="35"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} <a href="{% url 'listagem_pela_empresa' emprego.user.id %}"><b style="color: #6777ef; text-decoration: underline;">{{emprego.user.fullname|title}}</b></a> {% else %} {{emprego.user.username|title}} {% endif %} <span style="font-size: 11px;"> - Postado há {{emprego.created|timesince}}</span> </p>
+                
+              </div>  
+            </div>
+          </div>
+          {% endfor %}        
+        </div>
       </div>
 
       <nav class="float-right">
         <ul class="pagination">
           <li class="page-item">
             {% if page_obj.has_previous %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page=1">&laquo; Primeiro</a>
+              {% else %}
               <a class="page-link" href="?page=1">&laquo; Primeiro</a>
+              {% endif %}  
             {% endif %}
           </li>
 
           <li class="page-item">
             {% if page_obj.has_previous %}
+              {% if definerouter %}
+                <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.previous_page_number }}">Anterior</a>
+              {% else %}
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+              {% endif %}
             {% endif %}
           </li>
           <li class="page-item active">
+            {% if definerouter %}
+            <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.number }}">{{ page_obj.number }}</a>
+            {% else %}
             <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+            {% endif %}
           </li>
           <li class="page-item">
             <a class="page-link" href="#">de</a>
           </li>
           <li class="page-item">
+            {% if definerouter %}
+            <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% else %}
             <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
           </li>
           <li class="page-item">
             {% if page_obj.has_next %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.next_page_number }}">Próximo</a>
+              {% else %}
               <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+              {% endif %}
               
             {% endif %}
           </li>
           <li class="page-item">
             {% if page_obj.has_next %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+              {% else %}
               <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+              {% endif %}
             {% endif %}
           </li>
         </ul>
