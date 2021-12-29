@@ -18,6 +18,22 @@
     </section>
     <div class="section-body">
 
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
+              <form id="search-form" action="" method="get">
+                <div id="autocomplete">
+                  <input class="autocomplete-input" type="text" name="search" />
+                  <ul class="autocomplete-result-list"></ul>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
       {% if anuncios_company %}
         <div class="row">
           {% for anuncio in anuncios_company %}
