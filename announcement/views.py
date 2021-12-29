@@ -118,6 +118,12 @@ class AnnouncementListAllVacanciesViewSet(ListView):
         else:
             retorno = Announcement.objects.filter(active = True).order_by('-created')
         return retorno
+    
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        if self.request.GET.get('search'):
+            context['definerouter'] = self.request.GET.get('search')
+        return context
 
 class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
     model = Announcement

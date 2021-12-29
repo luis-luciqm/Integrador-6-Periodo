@@ -61,33 +61,57 @@
         <ul class="pagination">
           <li class="page-item">
             {% if page_obj.has_previous %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page=1">&laquo; Primeiro</a>
+              {% else %}
               <a class="page-link" href="?page=1">&laquo; Primeiro</a>
+              {% endif %}  
             {% endif %}
           </li>
 
           <li class="page-item">
             {% if page_obj.has_previous %}
+              {% if definerouter %}
+                <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.previous_page_number }}">Anterior</a>
+              {% else %}
                 <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+              {% endif %}
             {% endif %}
           </li>
           <li class="page-item active">
+            {% if definerouter %}
+            <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.number }}">{{ page_obj.number }}</a>
+            {% else %}
             <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}</a>
+            {% endif %}
           </li>
           <li class="page-item">
             <a class="page-link" href="#">de</a>
           </li>
           <li class="page-item">
+            {% if definerouter %}
+            <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% else %}
             <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+            {% endif %}
           </li>
           <li class="page-item">
             {% if page_obj.has_next %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.next_page_number }}">Próximo</a>
+              {% else %}
               <a class="page-link" href="?page={{ page_obj.next_page_number }}">Próximo</a>
+              {% endif %}
               
             {% endif %}
           </li>
           <li class="page-item">
             {% if page_obj.has_next %}
+              {% if definerouter %}
+              <a class="page-link" href="?search={{definerouter}}&page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+              {% else %}
               <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+              {% endif %}
             {% endif %}
           </li>
         </ul>
