@@ -79,7 +79,7 @@ class AnnouncementUpdateView(PermissionRequiredMixin,LoginRequiredMixin,UpdateVi
     model = Announcement
     form_class = AnnouncementForm
     template_name = 'announcement/form-create-anuncio.html'
-    permission_required = ('announcement.change_announcement')
+    permission_required = ('announcement.add_announcement')
     queryset = Announcement.objects.all()
     lookup_field = 'slug'
     
@@ -109,7 +109,7 @@ class AnnouncementListAllJobsViewSet(ListView):
 class AnnouncementListAllVacanciesViewSet(ListView):
     model = Announcement
     template_name = 'announcement/all_vacancies.html'
-    paginate_by = 8
+    paginate_by = 16
     
     def get_queryset(self):
         retorno = None

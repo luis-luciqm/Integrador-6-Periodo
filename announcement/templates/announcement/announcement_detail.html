@@ -22,52 +22,55 @@
                 {% endfor %}
             </ul>
         {% endif %}
-        <div class="section-body">
-            <div class="row">
-                <div class="col-12">
-                    <div  class="card">
-                        <div  class="card-body">
-                            
-                            {% if anuncio.user.image %}
-                                <img width="25%" height="30%" style="float: left; border-radius: 10px;" src="/media/{{anuncio.user.image}}" alt="{{anuncio.title}}">
-                            {% else %}
-                                <img width="25%" height="10%" style="float: left; margin-top: 15px; border-radius: 10px" src="https://www.escritoriodominio.com.br/wp-content/themes/consultix/images/no-image-found-360x260.png" alt="{{anuncio.title}}">
-                            {% endif %}
+        
+        <div class="container">
+            <div class="section-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div  class="card">
+                            <div  class="card-body">
+                                
+                                {% if anuncio.user.image %}
+                                    <img width="20%" height="30%" style="float: left; border-radius: 10px;" src="/media/{{anuncio.user.image}}" alt="{{anuncio.title}}">
+                                {% else %}
+                                    <img width="20%" height="10%" style="float: left; margin-top: 15px; border-radius: 10px" src="https://www.escritoriodominio.com.br/wp-content/themes/consultix/images/no-image-found-360x260.png" alt="{{anuncio.title}}">
+                                {% endif %}
 
-                            <div style="margin-left: 30px;"  class="card-body float-left">
-                                <h5 style="font-size: 25px; max-width:650px;" class="card-title">{{anuncio.title}}</h5>
-                                <p style="font-size: 20px;" class="card-text"><i class="fas fa-business-time"></i> {{anuncio.user.fullname|title}} - {{anuncio.city}}</p>
-                                <p style="font-size: 20px;" class="card-text"><i class="far fa-money-bill-alt"></i> Remuneração de R$ {{anuncio.money}}</p>
-                                <p style="font-size: 20px;" class="card-text text-success"><b><span><img style="width: 15px;" src="{% static 'img/vagas.png' %}" alt=""> {{anuncio.number_vacancies}}</span> Vagas Disponíveis</b></p>
-                                <p style="font-size: 11px;"><i class="fas fa-stopwatch"></i> Postado há {{anuncio.created|timesince}}</p>
+                                <div style="margin-left: 30px;"  class="card-body float-left">
+                                    <h5 style="font-size: 25px; max-width:650px;" class="card-title">{{anuncio.title}}</h5>
+                                    <p style="font-size: 20px;" class="card-text"><i class="fas fa-business-time"></i> Vaga de {{anuncio.type_vacancy | title}} - {{anuncio.city}}</p>
+                                    <p style="font-size: 20px;" class="card-text"><i class="far fa-money-bill-alt"></i> Remuneração de R$ {{anuncio.money}}</p>
+                                    <p style="font-size: 20px;" class="card-text text-success"><b><span><img style="width: 15px;" src="{% static 'img/vagas.png' %}" alt=""> {{anuncio.number_vacancies}}</span> Vagas Disponíveis</b></p>
+                                    <p style="font-size: 12px;">{{anuncio.user.fullname|title}} - <i class="fas fa-stopwatch"></i>  Postado há {{anuncio.created|timesince}}</p>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
-        <div style="max-width: 1600px;" class="card">
-            <div></div>
-            <h6 style="font-size: 35px; max-width:700px; margin: auto; margin-top: 20px;" class="card-title">Descrição da Vaga</h6>
+            <div style="max-width: 1600px;" class="card">
+                <div></div>
+                <h6 style="font-size: 35px; max-width:700px; margin: auto; margin-top: 20px;" class="card-title">Descrição da Vaga</h6>
 
-            <div style="max-width: 1700px; " class="card-body">
-                {{anuncio.description|safe}}
-            </div>
-            <div class="card-body text-center">
-                {% if request.user != anuncio.user or not request.user.is_authenticated %}
-                <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
-                {% elif request.user == anuncio.user %}
-                    <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anúncio</b></a>
-                    <a href="{% url 'candidatos' anuncio.slug %}" class="btn btn-info btn-lg"><b>Ver Candidatos</b></a>
-                    {% if anuncio.active %}
-                        <a href="{% url 'desativar_anuncio' anuncio.slug %}"><button class="btn btn-danger btn-lg"><b>Desativar</b></button></a>
-                    {% else %}
-                        <a href="{% url 'ativar_anuncio' anuncio.slug %}"><button class="btn btn-success btn-lg"><b>Ativar</b></button></a>
+                <div style="max-width: 1700px; " class="card-body">
+                    {{anuncio.description|safe}}
+                </div>
+                <div class="card-body text-center">
+                    {% if request.user != anuncio.user or not request.user.is_authenticated %}
+                    <a href="{% url 'participar_anuncio' anuncio.pk %}" class="btn btn-primary btn-lg"><b>Candidatar-se a Vaga</b></a>
+                    {% elif request.user == anuncio.user %}
+                        <a href="{% url 'editar_anuncio' anuncio.slug %}" class="btn btn-primary btn-lg"><b>Editar Anúncio</b></a>
+                        <a href="{% url 'candidatos' anuncio.slug %}" class="btn btn-info btn-lg"><b>Ver Candidatos</b></a>
+                        {% if anuncio.active %}
+                            <a href="{% url 'desativar_anuncio' anuncio.slug %}"><button class="btn btn-danger btn-lg"><b>Desativar</b></button></a>
+                        {% else %}
+                            <a href="{% url 'ativar_anuncio' anuncio.slug %}"><button class="btn btn-success btn-lg"><b>Ativar</b></button></a>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                </div>
             </div>
         </div>
 
