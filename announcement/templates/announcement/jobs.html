@@ -16,50 +16,91 @@
           </div>
         </div>
     </section>
-    <div class="section-body">
-
-    <div class="row">
-      <div class="col-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
-              <form id="search-form" action="" method="get">
-                <div id="autocomplete">
-                  <input class="autocomplete-input" type="text" name="search" />
-                  <ul class="autocomplete-result-list"></ul>
+    <div class="container">
+      <div class="section-body">
+        {% if jobs %}
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="mr-4">Pesquise por cidade, tipo de vaga, etc.</h4>
+                    <form id="search-form" action="" method="get">
+                      <div id="autocomplete">
+                        <input class="autocomplete-input" type="text" name="search" />
+                        <ul class="autocomplete-result-list"></ul>
+                      </div>
+                    </form>
                 </div>
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-      <div class="row">
-        {% for emprego in jobs %}
-
-        <div class="col-12 col-md-6 col-lg-6">
-          <div class="card">
-            <div class="card-header t">
-              <h4>{{emprego.title}}</h4>
-              <div class="card-header-action">
-                <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
-                  Detalhes
-                </a>
               </div>
             </div>
-            <div class="card-body">
-              <p><img width="45"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} {{emprego.user.fullname}} {% else %} {{emprego.user.username|title}} {% endif %} - {{emprego.number_vacancies}} Vagas</p>
-              <p style="font-size: 10.4px; margin-top: -13px;">Postado há {{emprego.created|timesince}}</p>
+          </div>
+
+          <div class="row">
+            {% for emprego in jobs %}
+            <div class="col-12 col-md-8 col-lg-6">
+              <div class="card">
+                <div class="card-header t">
+                  <h4>{{emprego.title}} <br>  <p style="color: green;"> {{emprego.number_vacancies}} vagas</p> </h4>
+                  <div class="card-header-action">
+                    <a href="{% url 'detalhes_anuncio' emprego.slug %}" class="btn btn-primary">
+                      Detalhes
+                    </a>
+                  </div>
+                </div>
+                <div style="padding-top:0px !important;" class="card-body">
+                  <p>Vaga de {{emprego.type_vacancy|title}}</p>
+                  <p style="margin-top: -10px;">{{emprego.city|title}}</p>
+                  <p><img width="35"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} <a href="{% url 'listagem_pela_empresa' emprego.user.id %}"><b style="color: #6777ef; text-decoration: underline;">{{emprego.user.fullname|title}}</b></a> {% else %} {{emprego.user.username|title}} {% endif %} <span style="font-size: 11px;"> - Postado há {{emprego.created|timesince}}</span> </p>
+                </div>  
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+        {% else %}
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 style="margin: auto;">Nenhuma vaga de emprego disponível</h4>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        {% endif %}
 
-        {% endfor %}
+
+
       </div>
-
-
-
     </div>
 </div>
+
+{% block js_page %}
+<script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+
+  <script>
+
+    new Autocomplete('#autocomplete', {
+
+      search : input => {
+
+        const url = `/anuncio/search_jobs/?search=${input}`
+        return new Promise(resolve => {
+          fetch(url).then(response => response.json()).then(data => {
+            resolve(data.data)
+          })
+        })
+
+      },
+
+      onSubmit : result => {
+        var searchform = $('#search-form');
+        searchform.submit();
+      }
+
+    })
+  </script>
+{% endblock js_page %}
+
 
 {% endblock content %}
