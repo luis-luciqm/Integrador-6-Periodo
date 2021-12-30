@@ -3039,4 +3039,12 @@ ul#autocomplete-result-list-1{
 
 }
 
+.decoration_text{
+  text-decoration: none;
+}
+
+.decoration_text:hover{
+  text-decoration: underline !important;
+}
+
 
