@@ -3047,4 +3047,8 @@ ul#autocomplete-result-list-1{
   text-decoration: underline !important;
 }
 
+div.card-header.t > h4{
+  margin-bottom: -20px !important;
+}
+
 
