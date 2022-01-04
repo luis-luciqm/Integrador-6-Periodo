@@ -28,4 +28,5 @@ urlpatterns = [
     path('editar_usuario/', update_profile, name='editar_usuario'),
     path('participar_anuncio/<int:pk>/', ParticipateAnnounceFun, name="participar_anuncio"),
     path('ver_usuario/<str:username>/', UserDetailsView.as_view(), name='ver_usuario'),
+    path('competencias_usuario/', SkillsUsers.as_view(), name='competencias_usuario'),
 ]

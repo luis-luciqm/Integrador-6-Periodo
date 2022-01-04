@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from accounts.models import Notification
 from announcement.models import Announcement, City, ParticipateAnnounce
-from authentication.models import User
+from authentication.models import *
 from .forms import AnnouncementForm
 from django.urls.base import reverse_lazy
 import datetime
@@ -289,6 +289,21 @@ def search_auto_complete_company(request):
 
     return JsonResponse({'status': 200, 'data': payload})
 
+def search_auto_complete_candidates_anuncio(request):
+    value = request.GET.get('search')
+    payload = []
+    if value:
+        users = ParticipateAnnounce.objects.filter(announcement__slug = request.GET.get('slug'),user__username__icontains = value)
+        skills = Skills.objects.filter(name__icontains = value)
+        
+        for user_participate in users:
+           payload.append(user_participate.user.username)
+
+        for skill in skills:
+            payload.append(skill.name)
+
+    return JsonResponse({'status': 200, 'data': payload})
+
 class AboutUs(View):
     template_name = 'announcement/about-us.html'
     
@@ -301,9 +316,14 @@ class ParticipateAnnounceList(LoginRequiredMixin, ListView):
     paginate_by = 15
     
     def get_queryset(self):
-        return ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug'])
+        if not self.request.GET.get('search'):
+            return ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug'])
+        value = self.request.GET.get('search')
+        return ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug']).filter(Q(user__skills__name = value)|Q(user__username__icontains = value))
+            
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['product_slug'] = self.kwargs['slug']
         context['qtd_participates'] = ParticipateAnnounce.objects.filter(announcement__slug = self.kwargs['slug']).count()
         return context

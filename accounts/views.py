@@ -11,7 +11,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
     PasswordResetCompleteView, PasswordChangeView
 from .models import *
-from authentication.models import User
+from authentication.models import *
 from django.views.generic.detail import DetailView
 
 
@@ -128,6 +128,11 @@ class UserDetailsView(LoginRequiredMixin, DetailView):
             instance =  qs.first()
         return instance
 
-
+class SkillsUsers(ListView, LoginRequiredMixin):
+    model = Skills
+    queryset = Skills.objects.all()
+    template_name = 'accounts/skills.html'
+    context_object_name = 'skills'
+    
             
 

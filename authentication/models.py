@@ -5,6 +5,14 @@ from django.contrib.auth.models import (
 
 # Create your models here.
 
+class Skills(models.Model):
+    name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Competências"
+
 class City (models.Model):
     name = models.CharField(max_length=200)
     estado = models.CharField(max_length=200)
@@ -12,6 +20,7 @@ class City (models.Model):
         verbose_name = "Cidade"
 
     def __str__(self):
+        
         return self.name + ' / ' + self.estado
 class UserManager(BaseUserManager):
     
@@ -55,6 +64,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     city = models.ForeignKey(City,related_name="city_user", null=True, on_delete= models.SET_NULL)
     curriculum = models.FileField(upload_to='users/curriculos/',null=True,max_length=500, blank = True)
+    
+    skills = models.ManyToManyField(Skills,related_name='skills_users',null=True, blank=True)
     
     objects = UserManager()
     

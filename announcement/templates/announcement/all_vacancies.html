@@ -52,7 +52,7 @@
               <div style="padding-top:0px !important;" class="card-body">
                 <p style="margin-top: 10px !important;"><i class="fas fa-briefcase"></i> Vaga de {{emprego.type_vacancy|title}}</p>
                 <p style="margin-top: -10px;"><i class="fa fa-map-marker"></i>  {{emprego.city}}</p>
-                <p><img width="35"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} <a href="{% url 'listagem_pela_empresa' emprego.user.id %}"><b class="decoration_text" style="color: #6777ef;">{{emprego.user.fullname|title}}</b></a> {% else %} {{emprego.user.username|title}} {% endif %} <span style="font-size: 11px;"> - Postado há {{emprego.created|timesince}}</span> </p>
+                <p><img width="35"  class="mr-2" {% if emprego.user.image %} style="border-radius: 5px;" src="/media/{{emprego.user.image}}" {% else %} style="border-radius: 50% !important;" src="{% static 'assets/img/avatar/avatar-1.png'%}" {% endif %} alt=""> {% if emprego.user.fullname %} <a href="{% url 'listagem_pela_empresa' emprego.user.id %}"><b class="decoration_text" style="color: #6777ef;">{{emprego.user.fullname|title}}</b></a> {% else %} <a href="{% url 'listagem_pela_empresa' emprego.user.id %}"><b>{{emprego.user.username|title}}</b></a> {% endif %} <span style="font-size: 11px;"> - Postado há {{emprego.created|timesince}}</span> </p>
                 
               </div>  
             </div>
