@@ -293,7 +293,8 @@ def search_auto_complete_candidates_anuncio(request):
     value = request.GET.get('search')
     payload = []
     if value:
-        users = ParticipateAnnounce.objects.filter(announcement__slug = request.GET.get('slug'),user__username__icontains = value)
+        users = ParticipateAnnounce.objects.filter(announcement__slug = request.GET.get('slug'),\
+            user__username__icontains = value)
         skills = Skills.objects.filter(name__icontains = value)
         
         for user_participate in users:
