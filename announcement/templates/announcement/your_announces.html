@@ -14,43 +14,44 @@
           </div>
         </div>
 
+        <div class="container">
+            {% if announces %}
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="row">
+                    {% for vaga in announces %}
 
-        {% if announces %}
-            {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags == 'error' %} class="alert alert-danger"{% endif %} {% if message.tags == 'success' %} class="alert alert-success"{% endif %}>{{ message }}</li>
+                    <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-header your">
+                        <h4>{{vaga.title}}</h4>
+                        <div class="card-header-action">
+                            <a href="{% url 'detalhes_anuncio' vaga.slug %}" class="btn btn-primary">
+                            Detalhes
+                            </a>
+                            {% if vaga.active %}
+                                <div class="badge badge-success">Ativo</div>
+                            {% else %}
+                                <div style="background-color: rgb(109, 107, 107);" class="badge badge-secondary">Inativo</div>
+                            {% endif %}
+                        </div>
+                        </div>
+                        <div class="card-body">
+                            <p>Vaga de {{vaga.type_vacancy|title}}</p>
+                            <p style="font-size: 10.5px; margin-top: -15px;"> há {{vaga.created|timesince}}</p>
+                        </div>
+                    </div>
+                    </div>
+
                     {% endfor %}
-                </ul>
-            {% endif %}
-            <div class="row">
-                {% for vaga in announces %}
-
-                <div class="col-12 col-md-6 col-lg-6">
-                <div class="card">
-                    <div class="card-header your">
-                    <h4>{{vaga.title}}</h4>
-                    <div class="card-header-action">
-                        <a href="{% url 'detalhes_anuncio' vaga.slug %}" class="btn btn-primary">
-                        Detalhes
-                        </a>
-                        {% if vaga.active %}
-                            <div class="badge badge-success">Ativo</div>
-                        {% else %}
-                            <div style="background-color: rgb(109, 107, 107);" class="badge badge-secondary">Inativo</div>
-                        {% endif %}
-                    </div>
-                    </div>
-                    <div class="card-body">
-                        <p>Vaga de {{vaga.type_vacancy|title}}</p>
-                        <p style="font-size: 10.5px; margin-top: -15px;">Postado há {{vaga.created|timesince}}</p>
-                    </div>
                 </div>
-                </div>
-
-                {% endfor %}
-            </div>
-        {% else %}
+            {% else %}
+        </div>
 
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12">
