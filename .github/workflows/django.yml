@@ -18,6 +18,7 @@ jobs:
           port: 22
           envs: DJANGO_SECRET_KEY
           script: |
+            cd Site/Integrador-6-Periodo/.github/workflows
             ./restart.sh
             
 
