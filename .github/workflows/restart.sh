@@ -1,5 +1,5 @@
 #!/bin/sh
-cd Site/Integrador-6-Periodo
+cd /root/Site/Integrador-6-Periodo
 source venv/bin/activate
 git pull
 pip install -r requirements.txt
