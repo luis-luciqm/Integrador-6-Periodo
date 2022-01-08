@@ -160,7 +160,7 @@ def ParticipateAnnounceFun(request, pk):
         if not ParticipateAnnounce.objects.filter(user = request.user, announcement_id = pk).exists():
             if not anounce.user == request.user:
                 p = ParticipateAnnounce.objects.create(user = request.user, announcement = anounce)
-                messages.success(request, "Você agora está concorrendo a vaga. Boa sorte!!")
+                messages.success(request, "Você agora está concorrendo a vaga. Boa sorte!")
                 if not request.user.curriculum:
                     messages.warning(request, "Para maiores chances de conseguir uma vaga, vá até a seção de editar perfil e anexe seu currículo.")
                 Notification.objects.create(participate=p, text=f'Uma nova pessoa se candidatou para o anuncio: {anounce.title}')

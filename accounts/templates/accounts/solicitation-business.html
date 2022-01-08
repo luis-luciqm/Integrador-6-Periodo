@@ -12,7 +12,7 @@
                 <h1>Venha ser um Anunciante!</h1>
             </div>
 
-            <div class="card card-primary">
+            <div class="card">
                 <div class="card-body">
                     {% if messages %}
                     <ul style="margin-left: -40px;" class="messages">
@@ -21,7 +21,7 @@
                         {% endfor %}
                     </ul>
                     {% else %}
-                    <p class="text-muted">Descreva-nos o porque você quer ser um anunciante.</p>
+                    <p class="text-muted"><b>Descreva-nos o porque você quer ser um anunciante.</b></p>
                     <form action="" method="post">
                         {% csrf_token %}
                         {{ form.as_p}}
