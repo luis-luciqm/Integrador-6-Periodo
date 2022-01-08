@@ -36,6 +36,7 @@ urlpatterns = [
     # path('api/accounts/', include('accounts.api.urls')),
     # path('api/autenticacao/', include('authentication.urls')),
     path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),

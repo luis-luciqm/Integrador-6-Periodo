@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -89,9 +90,29 @@
                     </button>
                   </div>
                 </form>
-                <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Entre com uma conta Google</div>
+                
+
+                <div>
+                  {% if user.is_authenticated %}
+                    <div class="text-center mt-4 mb-3">
+                      <div class="badge badge-danger">Você já está logado como {{user.username}}</div>
+                    </div>
+                  {% else %}
+
+                    <div class="text-center mt-4 mb-3">
+                      <div class="text-job text-muted"> Ou Entre com uma conta Google</div>
+                    </div>
+
+                    <div style="border: 2px solid #33cc33; border-radius: 40px;" class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz" data-toggle="tooltip" data-placement="top" title="Entre com seu login Google" data-onsuccess="onSuccess">
+                      <a class="btn botoes-login" href="{% provider_login_url 'google' %}">
+                        <img class="img-login" style="width: 13%;" src="{% static 'assets/img/google1.png'%}" alt="">
+                      </a>
+                    </div>
+
+                    
+                  {% endif %}
                 </div>
+
                 <!-- <div class="row sm-gutters">
                   <div class="col-6">
                     <a class="btn btn-block btn-social btn-facebook">
@@ -99,7 +120,7 @@
                     </a>
                   </div>
                 </div> -->
-                <div class="mt-5 text-muted text-center">
+                <div class="mt-5 text-muted text-center"><hr>
                   Não tem uma conta? <a href="/accounts/register">Criar conta</a>
                 </div>
               </div>
