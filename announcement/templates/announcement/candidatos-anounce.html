@@ -48,6 +48,7 @@
                             <thead>
                             <tr>
                                 <th>Candidato</th>
+                                <th>Competências</th>
                                 <th>Ação</th>
                             </tr>
                             </thead>
@@ -61,6 +62,12 @@
                                     <img style="border-radius: 7px;" alt="image" width="45" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-4">
                                     {% endif %}
                                     <span style="color: rgb(31, 31, 31)">{{post.user.fullname|title}}</span>
+                                </td>
+
+                                <td>
+                                {% for sk in post.user.skills.all %}
+                                  {{sk}}<br>
+                                {% endfor %}
                                 </td>
 
                                 <td><a class="btn btn-primary" href="{% url 'ver_usuario' post.user.username %}">Ver mais</a></td>
