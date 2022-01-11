@@ -69,6 +69,9 @@
                                   {% for sk in post.user.skills.all %}
                                     {{sk}}<br>
                                   {% endfor %}
+
+                                {% else %}
+                                  <p>Nenhuma Competência</p>
                                 {% endif %}
                                 </td>
 
