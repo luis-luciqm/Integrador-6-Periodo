@@ -17,7 +17,7 @@
   </section>
 
 
-  <section style="background-color: #f4f5f7;">
+  <section style="background-color: #f4f5f7; margin-top:-3.5%;">
     <div class="container py-5">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col col-lg-12 mb-4 mb-lg-0">
@@ -61,12 +61,26 @@
                     </div>
                   </div>
                   
+                  <h6>Competências</h6>
+                  <hr class="mt-0 mb-3">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      {% if object.skills %}
+                        {% for sk in object.skills.all %}
+                          {{sk}},
+                        {% endfor %}
+                      {% else %}
+                      <p class="text-muted">O Candidato não pussui nenhuma competência.</p>
+                      {% endif %}
+                    </div>
+                  </div>
+
                   <h6>Acrécimos</h6>
-                  <hr class="mt-0 mb-4">
+                  <hr class="mt-0 mb-3">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
                       {% if object.curriculum %}
-                      <a target="_blank" class="btn btn-primary" href="/media/{{object.curriculum}}">Currículo</a>
+                      <a target="_blank" class="btn btn-primary" href="/media/{{object.curriculum}}">Ver Currículo</a>
                       {% else %}
                       <p class="text-muted">Curriculo não informado.</p>
                       {% endif %}
