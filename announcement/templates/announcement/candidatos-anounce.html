@@ -65,9 +65,11 @@
                                 </td>
 
                                 <td>
-                                {% for sk in post.user.skills.all %}
-                                  {{sk}}<br>
-                                {% endfor %}
+                                {% if post.user.skills.all %}
+                                  {% for sk in post.user.skills.all %}
+                                    {{sk}}<br>
+                                  {% endfor %}
+                                {% endif %}
                                 </td>
 
                                 <td><a class="btn btn-primary" href="{% url 'ver_usuario' post.user.username %}">Ver mais</a></td>
