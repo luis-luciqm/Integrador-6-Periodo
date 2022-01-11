@@ -61,19 +61,17 @@
                     </div>
                   </div>
                   
-                  <h6>Competências</h6>
-                  <hr class="mt-0 mb-3">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      {% if object.skills %}
+                  {% if object.skills %}
+                    <h6>Competências</h6>
+                    <hr class="mt-0 mb-3">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
                         {% for sk in object.skills.all %}
                           {{sk}},
                         {% endfor %}
-                      {% else %}
-                      <p class="text-muted">O Candidato não pussui nenhuma competência.</p>
-                      {% endif %}
+                      </div>
                     </div>
-                  </div>
+                  {% endif %}
 
                   <h6>Acrécimos</h6>
                   <hr class="mt-0 mb-3">
