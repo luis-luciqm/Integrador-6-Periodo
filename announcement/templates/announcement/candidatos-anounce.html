@@ -67,11 +67,11 @@
                                 <td>
                                 {% if post.user.skills.all %}
                                   {% for sk in post.user.skills.all %}
-                                    {{sk}}<br>
+                                    - {{sk}}<br>
                                   {% endfor %}
 
                                 {% else %}
-                                  <p>Nenhuma Competência</p>
+                                  Nenhuma Competência
                                 {% endif %}
                                 </td>
 
