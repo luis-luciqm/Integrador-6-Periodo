@@ -143,7 +143,6 @@ class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
 class AnnouncementListByCompanyViewSet(ListView):
     model = Announcement
     template_name = 'announcement/list_anuncios_by_company.html'
-    paginate_by = 16
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
