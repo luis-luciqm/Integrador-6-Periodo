@@ -16,6 +16,7 @@ urlpatterns = [
     path('search_jobs/', search_auto_complete_jobs),
     path('search_company/', search_auto_complete_company),
     path('search_user_or_skill/', search_auto_complete_candidates_anuncio),
+    path('search_user_premium/', search_auto_complete_candidates_premium),
     path('candidatos/<slug:slug>/',ParticipateAnnounceList.as_view(), name="candidatos"),
     path('listagem_de_usuarios_premium/', UsersPremiumListViewSet.as_view(), name='listagem_de_usuarios_premium'),
 

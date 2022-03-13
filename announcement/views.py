@@ -146,7 +146,10 @@ class UsersPremiumListViewSet(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal').exclude(id = self.request.user.id).order_by('username')
+        if not self.request.GET.get('search'):
+            context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal').exclude(id = self.request.user.id).order_by('username')
+        else:
+            context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal', username__icontains = self.request.GET.get('search')).exclude(id = self.request.user.id).order_by('username')
         return context
 
 class AnnouncementListByCompanyViewSet(ListView):
@@ -313,6 +316,28 @@ def search_auto_complete_candidates_anuncio(request):
             payload.append(skill.name)
 
     return JsonResponse({'status': 200, 'data': payload})
+
+
+
+
+
+def search_auto_complete_candidates_premium(request):
+    value = request.GET.get('search')
+    payload = []
+    if value:
+        users = User.objects.filter(username__icontains = value)
+        skills = Skills.objects.filter(name__icontains = value)
+        
+        for user_name in users:
+           payload.append(user_name.username)
+
+        for skill in skills:
+            payload.append(skill.name)
+
+    return JsonResponse({'status': 200, 'data': payload})
+
+
+
 
 class AboutUs(View):
     template_name = 'announcement/about-us.html'

@@ -56,7 +56,7 @@
                             {% for user in users_list %}
                             <tr>
                                 <td style="color: rgb(31, 31, 31)">
-                                    {% if user.user.image %}
+                                    {% if user.image %}
                                     <img style="border-radius: 7px;" src="/media/{{user.image}}" width="45" class="mr-3" alt="avatar">
                                     {% else %}
                                     <img style="border-radius: 7px;" alt="image" width="45" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-3">
@@ -65,8 +65,8 @@
                                 </td>
 
                                 <td>
-                                {% if user.user.skills.all %}
-                                  {% for sk in user.user.skills.all %}
+                                {% if user.skills.all %}
+                                  {% for sk in user.skills.all %}
                                     - {{sk}}<br>
                                   {% endfor %}
 
@@ -136,7 +136,7 @@
 
       search : input => {
 
-        const url = `/anuncio/search_user_or_skill/?search=${input}&slug={{product_slug}}`
+        const url = `/anuncio/search_user_premium/?search=${input}`
         return new Promise(resolve => {
           fetch(url).then(response => response.json()).then(data => {
             resolve(data.data)
