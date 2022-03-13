@@ -149,7 +149,7 @@ class UsersPremiumListViewSet(ListView):
         if not self.request.GET.get('search'):
             context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal').exclude(id = self.request.user.id).order_by('username')
         else:
-            context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal', username__icontains = self.request.GET.get('search')).exclude(id = self.request.user.id).order_by('username')
+            context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal').filter(Q(username__icontains = self.request.GET.get('search')) | Q(skills__name__icontains = self.request.GET.get('search'))).exclude(id = self.request.user.id).order_by('username')
         return context
 
 class AnnouncementListByCompanyViewSet(ListView):
