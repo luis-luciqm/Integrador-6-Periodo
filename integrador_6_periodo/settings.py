@@ -201,8 +201,8 @@ EMAIL_USE_TLS = True
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 300,
-        'width': 700,
+        'height': 310,
+        'width': '125%',
     },
 }
 CKEDITOR_UPLOAD_PATH = 'uploads/'

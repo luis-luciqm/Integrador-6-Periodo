@@ -61,6 +61,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
+    is_premium = models.BooleanField(default=False)
     
     city = models.ForeignKey(City,related_name="city_user", null=True, on_delete= models.SET_NULL)
     curriculum = models.FileField(upload_to='users/curriculos/',null=True,max_length=500, blank = True)

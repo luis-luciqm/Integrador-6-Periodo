@@ -95,7 +95,7 @@
             {% else %}
               <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png'%}" class="rounded-circle mr-1">
             {% endif %}
-            <div class="d-sm-none d-lg-inline-block">Olá, {{request.user.username|title}}</div></a>
+            <div class="d-sm-none d-lg-inline-block">{% if request.user.fullname %} Olá, {{request.user.fullname|title}} {% else %} Olá, {{request.user.username|title}} {% endif %}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logado desde {{request.user.created}}</div>
               <a href="{% url 'editar_usuario'%}" class="dropdown-item has-icon">
@@ -141,6 +141,9 @@
                 <ul class="dropdown-menu">
                   <li><a class="nav-link" href="{% url 'criar_anuncio' %}">Criar Anúncio</a></li>
                   <li><a class="nav-link" href="{% url 'seus_anuncios' %}">Meus Anúncios</a></li>
+                  {% if request.user.is_premium %}
+                  <li><a class="nav-link" href="{% url 'listagem_de_usuarios_premium' %}"><b>Premium - Ver Currículos</b></a></li>
+                  {% endif %}
                 </ul>
               </li>
               {% endif %}

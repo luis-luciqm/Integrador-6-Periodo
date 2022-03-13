@@ -140,6 +140,15 @@ class AnnouncementListAllPhasesViewSet(ListView): # phases = estágios
             context['phases'] = Announcement.objects.filter(type_vacancy = 'estágio',active = True,title__icontains = self.request.GET.get('search')).order_by('-created')
         return context
 
+class UsersPremiumListViewSet(ListView):
+    model = User
+    template_name = 'announcement/list_all_users-premium.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users_list'] = User.objects.filter(is_active = True, groups__name__icontains = 'Normal').exclude(id = self.request.user.id).order_by('username')
+        return context
+
 class AnnouncementListByCompanyViewSet(ListView):
     model = Announcement
     template_name = 'announcement/list_anuncios_by_company.html'
